@@ -1,9 +1,10 @@
 import cors from '@fastify/cors';
 import { FastifyInstance } from 'fastify';
+import { corsConfig } from '../../configs/cors';
 
 export default async function (fastify: FastifyInstance) {
   fastify.register(cors, {
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: corsConfig.origin,
+    methods: corsConfig.methods,
   });
 }
