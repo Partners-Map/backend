@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify/types/instance';
 
 export default async (fastify: FastifyInstance) => {
-  // fastify.options('/', (req, rep) => {
+  // fastify.get('/', (req, rep) => {
   //   rep.header('Access-Control-Allow-Origin', '*');
   //   rep.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   //   rep.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -16,33 +16,35 @@ export default async (fastify: FastifyInstance) => {
           description: 'OK',
           headers: {
             'Access-Control-Allow-Origin': {
-              type: 'string',
+              type: 'string'
             },
             'Access-Control-Allow-Methods': {
-              type: 'string',
+              type: 'string'
             },
             'Access-Control-Allow-Headers': {
-              type: 'string',
-            },
+              type: 'string'
+            }
           },
           content: {
             'text/plain': {
               schema: {
                 type: 'object',
                 properties: {
-                  status: { type: 'string' },
-                },
-              },
-            },
-          },
-        },
-      },
+                  status: { type: 'string' }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     handler: (req, rep) => {
       rep.header('Access-Control-Allow-Origin', '*');
       rep.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
       rep.header('Access-Control-Allow-Headers', 'Content-Type');
+      fastify.log.warn('good');
+
       rep.code(204).send({ status: 'good' });
-    },
+    }
   });
 };
