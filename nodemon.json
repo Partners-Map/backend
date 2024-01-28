@@ -1,0 +1,10 @@
+{
+  "watch": ["src"],
+  "ignore": ["src/__tests__/"],
+  "ext": "ts",
+  "verbose": true,
+  "exec": "npm run start",
+  "execMap": {
+    "ts": "node -r ts-node/register"
+  }
+}

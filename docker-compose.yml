@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  partners-db:
+    env_file: .env
+    image: postgres:12.17
+    environment:
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - ${DB_PORT}:5432
+    restart: always
+    volumes:
+      - partners_volume:/var/lib/postgresql/data
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    # networks:
+    #   - net
+
+# networks:
+#   net:
+#     driver: bridge
+
+volumes:
+  partners_volume:
