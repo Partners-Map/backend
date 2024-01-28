@@ -4,10 +4,10 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node .",
-    "dev": "nodemon",
+    "start": "PROJECT_STATUS=development ts-node .",
+    "dev": "PROJECT_STATUS=development nodemon",
     "build": "tsc -p tsconfig.json",
-    "test": "jest",
+    "test": "PROJECT_STATUS=test jest",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc"
   },
@@ -17,6 +17,9 @@
   },
   "author": "",
   "license": "ISC",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "bugs": {
     "url": "https://github.com/Partners-Map/backend/issues"
   },

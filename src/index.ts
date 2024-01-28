@@ -6,12 +6,12 @@ import Fastify from 'fastify';
 import { join } from 'path';
 import { version } from '../package.json';
 import { loggerConfig } from './configs/logger';
+import { PrismaClient } from '@prisma/client';
 
 const fastify = Fastify({
   logger: loggerConfig[process.env.PROJECT_STATUS] ?? true
 });
-
-console.log(process.env.PROJECT_STATUS);
+const prisma = new PrismaClient();
 
 fastify.register(fastifySwagger, {
   swagger: {
@@ -40,9 +40,11 @@ fastify.register(autoLoad, {
   }
 });
 
-fastify.listen({ port: 3003 }, (err, address) => {
+fastify.listen({ port: 3003 }, async (err, address) => {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
   }
+  const allUsers = await prisma.user.findMany();
+  console.log(allUsers);
 });
