@@ -10,41 +10,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id     String @id @default(uuid())
-  email  String @unique
-  name   String
-  role   Role   @relation(fields: [roleId], references: [id])
-  roleId String @unique
+model Users {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  roles    Roles  @relation(fields: [roleId], references: [id])
+  roleId   String
 }
 
-model Role {
-  id    String @id @default(uuid())
-  title String @unique
-  User  User[]
+model Roles {
+  id    String  @id @default(uuid())
+  title String  @unique
+  Users Users[]
 }
 
-model Partner {
-  id                    String   @id @default(uuid())
-  title                 String   @unique
+model Partners {
+  id                    String             @id @default(uuid())
+  title                 String             @unique
   requirements          String[]
   additionalInformation String?
-  category              Category @relation(fields: [categoryId], references: [id])
+  categorys             Categorys          @relation(fields: [categoryId], references: [id])
   categoryId            String
-  places                Place    @relation(fields: [placeId], references: [id])
-  placeId               String
+  PartnersOnPlaces      PartnersOnPlaces[]
 }
 
-model Category {
-  id      String    @id @default(uuid())
-  title   String
-  Partner Partner[]
+model Categorys {
+  id       String     @id @default(uuid())
+  title    String
+  Partners Partners[]
 }
 
-model Place {
-  id        String    @id @default(uuid())
-  adress    String
-  latitude  String
-  longitude String
-  Partner   Partner[]
+model Places {
+  id               String             @id @default(uuid())
+  adress           String
+  latitude         Decimal
+  longitude        Decimal
+  PartnersOnPlaces PartnersOnPlaces[]
+}
+
+model PartnersOnPlaces {
+  partners   Partners @relation(fields: [partnersId], references: [id])
+  places     Places   @relation(fields: [placesId], references: [id])
+  partnersId String
+  placesId   String
+
+  @@id([partnersId, placesId])
 }

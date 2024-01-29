@@ -1,3 +1,4 @@
 /node_modules
 /dist
-/prisma
+/prisma/migrations
+/prisma/schema.prisma
