@@ -1,15 +1,15 @@
 FROM node:20.11.0
 
-# RUN mkdir -p /usr/src/app/dist/
-# WORKDIR /usr/src/app/
+RUN mkdir -p /usr/src/app/dist/
+WORKDIR /usr/src/app/
 
-# COPY ./dist /usr/src/app/dist/
-# COPY ./package.json /usr/src/app/package.json
-# COPY ./.env /usr/src/app/.env
-# COPY ./package-lock.json /usr/src/app/package-lock.json
+COPY ./dist /usr/src/app/dist/
+COPY ./package.json /usr/src/app/package.json
+COPY ./.env /usr/src/app/.env
+COPY ./package-lock.json /usr/src/app/package-lock.json
 
-# RUN npm ci --omit=dev
+RUN npm ci --omit=dev
 
-# EXPOSE 3002
+EXPOSE 3002
 
-# CMD ["npm", "run", "up:prod"]
+CMD ["npm", "run", "prod"]

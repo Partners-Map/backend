@@ -40,11 +40,14 @@ fastify.register(autoLoad, {
   }
 });
 
-fastify.listen({ port: 3003 }, async (err, address) => {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
+fastify.listen(
+  { port: Number(process.env.SERVER_PORT) || 3002 },
+  async (err, address) => {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+    const allUsers = await prisma.users.findMany();
+    console.log(allUsers);
   }
-  const allUsers = await prisma.user.findMany();
-  console.log(allUsers);
-});
+);

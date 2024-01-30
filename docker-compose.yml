@@ -15,12 +15,27 @@ services:
       - partners_volume:/var/lib/postgresql/data
     extra_hosts:
       - 'host.docker.internal:host-gateway'
-    # networks:
-    #   - net
+    networks:
+      - partners-net
 
-# networks:
-#   net:
-#     driver: bridge
+  partners-server:
+    env_file: .env
+    build: .
+    restart: always
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    environment:
+      DB_HOST: host.docker.internal
+    depends_on:
+      - partners-db
+    networks:
+      - partners-net
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+networks:
+  partners-net:
+    driver: bridge
 
 volumes:
   partners_volume:
