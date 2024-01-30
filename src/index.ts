@@ -1,33 +1,13 @@
 import autoLoad from '@fastify/autoload';
-import fastifySwagger from '@fastify/swagger';
-import fastifySwaggerUi from '@fastify/swagger-ui';
+import { JsonSchemaToTsProvider } from '@fastify/type-provider-json-schema-to-ts';
 import 'dotenv/config';
 import Fastify from 'fastify';
 import { join } from 'path';
-import { version } from '../package.json';
 import { loggerConfig } from './configs/logger';
-import { PrismaClient } from '@prisma/client';
 
 const fastify = Fastify({
   logger: loggerConfig[process.env.PROJECT_STATUS] ?? true
-});
-const prisma = new PrismaClient();
-
-fastify.register(fastifySwagger, {
-  swagger: {
-    info: {
-      title: 'Partners map',
-      description: 'adadada',
-      version
-    }
-  }
-});
-
-fastify.register(fastifySwaggerUi, {
-  routePrefix: '/docs',
-  staticCSP: true,
-  transformStaticCSP: header => header
-});
+}).withTypeProvider<JsonSchemaToTsProvider>();
 
 fastify.register(autoLoad, {
   dir: join(__dirname, 'plugins')
@@ -40,6 +20,11 @@ fastify.register(autoLoad, {
   }
 });
 
+fastify.setErrorHandler((error, request, reply) => {
+  fastify.log.error(error);
+  reply.status(500).send({ error: 'Internal Server Error' });
+});
+
 fastify.listen(
   { port: Number(process.env.SERVER_PORT) || 3002 },
   async (err, address) => {
@@ -47,7 +32,5 @@ fastify.listen(
       fastify.log.error(err);
       process.exit(1);
     }
-    const allUsers = await prisma.users.findMany();
-    console.log(allUsers);
   }
 );

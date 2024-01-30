@@ -3,7 +3,7 @@
   "ignore": ["src/__tests__/"],
   "ext": "ts",
   "verbose": true,
-  "exec": "npm run start",
+  "exec": "npm run dev:manual",
   "execMap": {
     "ts": "node -r ts-node/register"
   }
