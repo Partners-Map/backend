@@ -1,11 +1,11 @@
-import { FastifyInstance } from 'fastify/types/instance';
-import { TCreateUserReq } from '../../@types/req/user';
+import { Places } from '@prisma/client';
+import { FastifyInstance } from 'fastify';
 import {
-  createUser,
-  deleteUserById,
-  getUserById,
-  updateUser
-} from '../../controllers/user';
+  createPlace,
+  deletePlace,
+  getPlaceById,
+  updatePlace
+} from '../../controllers/place';
 
 export default async (fastify: FastifyInstance) => {
   fastify.get<{
@@ -25,49 +25,46 @@ export default async (fastify: FastifyInstance) => {
           },
           required: ['id']
         },
-        tags: ['user']
+        tags: ['place']
       }
     },
-    async (req, rep) => {
-      const { id: userId } = req.params;
-      if (!userId) {
-        fastify.log.warn(req.params);
-      }
-      rep.code(200).send(await getUserById(fastify, userId));
+    async (req, res) => {
+      const { id: placeId } = req.params;
+      res.code(200).send(await getPlaceById(fastify, placeId));
     }
   );
-  fastify.post<{ Body: TCreateUserReq }>(
+  fastify.post<{ Body: Omit<Places, 'id'> }>(
     '/',
     {
       schema: {
         body: {
           type: 'object',
           properties: {
-            email: {
+            adress: {
               type: 'string'
             },
-            password: {
+            latitude: {
               type: 'string'
             },
-            roleId: {
+            longitude: {
               type: 'string'
             }
           },
-          required: ['email', 'password', 'roleId']
+          required: ['adress', 'latitude', 'longitude']
         },
-        tags: ['user']
+        tags: ['place']
       }
     },
     async (req, res) => {
-      const user = req.body;
-      res.code(201).send(await createUser(fastify, user));
+      const createdData = req.body;
+      res.code(200).send(await createPlace(fastify, createdData));
     }
   );
   fastify.put<{
     Params: {
       id: string;
     };
-    Body: TCreateUserReq;
+    Body: Omit<Places, 'id'>;
   }>(
     '/:id',
     {
@@ -84,25 +81,25 @@ export default async (fastify: FastifyInstance) => {
         body: {
           type: 'object',
           properties: {
-            email: {
+            adress: {
               type: 'string'
             },
-            password: {
+            latitude: {
               type: 'string'
             },
-            roleId: {
+            longitude: {
               type: 'string'
             }
           },
-          required: ['email', 'password', 'roleId']
+          required: ['adress', 'latitude', 'longitude']
         },
-        tags: ['user']
+        tags: ['place']
       }
     },
     async (req, res) => {
-      const { id: userId } = req.params;
-      const userData = req.body;
-      res.code(200).send(await updateUser(fastify, userId, userData));
+      const { id: placeId } = req.params;
+      const createdData = req.body;
+      res.code(200).send(await updatePlace(fastify, placeId, createdData));
     }
   );
   fastify.delete<{
@@ -122,13 +119,13 @@ export default async (fastify: FastifyInstance) => {
           },
           required: ['id']
         },
-        tags: ['user']
+        tags: ['place']
       }
     },
-    async (req, res) => {
-      const { id: userId } = req.params;
-      const userData = req.body;
-      res.code(200).send(await deleteUserById(fastify, userId));
+    async (req, rep) => {
+      const { id: placeId } = req.params;
+      fastify.log.warn(placeId);
+      rep.code(200).send(await deletePlace(fastify, placeId));
     }
   );
 };

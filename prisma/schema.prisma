@@ -29,12 +29,12 @@ model Partners {
   title                 String             @unique
   requirements          String[]
   additionalInformation String?
-  categorys             Categorys          @relation(fields: [categoryId], references: [id])
+  categories            Categories         @relation(fields: [categoryId], references: [id])
   categoryId            String
   PartnersOnPlaces      PartnersOnPlaces[]
 }
 
-model Categorys {
+model Categories {
   id       String     @id @default(uuid())
   title    String
   Partners Partners[]

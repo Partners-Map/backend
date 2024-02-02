@@ -1,16 +1,16 @@
 import { FastifyInstance } from 'fastify/types/instance';
-import { getAllUsers } from '../../controllers/user';
+import { getAllPlaces } from '../../controllers/place';
 
 export default async (fastify: FastifyInstance) => {
   fastify.get(
     '/',
     {
       schema: {
-        tags: ['user']
+        tags: ['place']
       }
     },
     async (req, rep) => {
-      rep.code(200).send(await getAllUsers(fastify));
+      rep.code(200).send(await getAllPlaces(fastify));
     }
   );
 };

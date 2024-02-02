@@ -38,7 +38,7 @@ const prisma = new PrismaClient();
       }
     ]
   });
-  await prisma.categorys.createMany({
+  await prisma.categories.createMany({
     data: [
       {
         title: 'кафе и рестораны'
@@ -78,32 +78,32 @@ const prisma = new PrismaClient();
       }
     ]
   });
-  const categorys = await prisma.categorys.findMany();
+  const categories = await prisma.categories.findMany();
   await prisma.partners.createMany({
     data: [
       {
         title: 'кафе',
         requirements: ['быть партнером'],
         additionalInformation: 'доп. информация',
-        categoryId: categorys[0].id
+        categoryId: categories[0].id
       },
       {
         title: 'спорт',
         requirements: ['быть партнером'],
         additionalInformation: 'доп. информация',
-        categoryId: categorys[1].id
+        categoryId: categories[1].id
       },
       {
         title: 'детский сад',
         requirements: ['быть партнером'],
         additionalInformation: 'доп. информация',
-        categoryId: categorys[2].id
+        categoryId: categories[2].id
       },
       {
         title: 'клуб',
         requirements: ['быть партнером'],
         additionalInformation: 'доп. информация',
-        categoryId: categorys[3].id
+        categoryId: categories[3].id
       }
     ]
   });

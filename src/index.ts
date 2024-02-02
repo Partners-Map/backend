@@ -20,9 +20,9 @@ fastify.register(autoLoad, {
   }
 });
 
-fastify.setErrorHandler((error, request, reply) => {
+fastify.setErrorHandler((error, request, res) => {
   fastify.log.error(error);
-  reply.status(500).send({ error: 'Internal Server Error' });
+  res.status(500).send({ error: 'Internal Server Error' });
 });
 
 fastify.listen(
