@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model User {
   id       String @id @default(uuid())
   email    String @unique
   password String
@@ -19,9 +19,9 @@ model Users {
 }
 
 model Roles {
-  id    String  @id @default(uuid())
-  title String  @unique
-  Users Users[]
+  id    String @id @default(uuid())
+  title String @unique
+  User  User[]
 }
 
 model Partners {

@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
     ]
   });
   const roles = await prisma.roles.findMany();
-  await prisma.users.createMany({
+  await prisma.user.createMany({
     data: [
       {
         email: 'admin@example.com',
