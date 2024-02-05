@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 (async () => {
-  await prisma.roles.createMany({
+  await prisma.role.createMany({
     data: [
       {
         title: 'админ'
@@ -13,7 +13,7 @@ const prisma = new PrismaClient();
       }
     ]
   });
-  const roles = await prisma.roles.findMany();
+  const roles = await prisma.role.findMany();
   await prisma.user.createMany({
     data: [
       {
@@ -38,7 +38,23 @@ const prisma = new PrismaClient();
       }
     ]
   });
-  await prisma.categories.createMany({
+  await prisma.partner.createMany({
+    data: [
+      {
+        name: 'OOO кафе ромашка'
+      },
+      {
+        name: 'OOO детский сад'
+      },
+      {
+        name: 'OOO клуб'
+      },
+      {
+        name: 'OOO спортзал'
+      }
+    ]
+  });
+  await prisma.category.createMany({
     data: [
       {
         title: 'кафе и рестораны'
@@ -54,82 +70,91 @@ const prisma = new PrismaClient();
       }
     ]
   });
-  await prisma.places.createMany({
+  const partners = await prisma.partner.findMany();
+  await prisma.place.createMany({
     data: [
       {
-        adress: 'Курортный проспект, 74',
-        latitude: 43.568259,
-        longitude: 39.742147
+        name: 'кафе ромашка',
+        description: '',
+        conditions: ['быть партнером'],
+        partnerId: partners[0].id
       },
       {
-        adress: 'Виноградная улица, 27',
-        latitude: 43.596652,
-        longitude: 39.713004
+        name: 'детский сад',
+        description: '',
+        conditions: ['быть партнером'],
+        partnerId: partners[1].id
       },
       {
-        adress: 'улица Войкова, 1',
-        latitude: 43.580808,
-        longitude: 39.71866
+        name: 'клуб',
+        description: 'крутой',
+        conditions: ['быть партнером'],
+        partnerId: partners[2].id
       },
       {
-        adress: 'улица Новая Заря, 7',
-        latitude: 43.605961,
-        longitude: 39.732181
+        name: 'спортзал',
+        description: '',
+        conditions: ['быть партнером'],
+        partnerId: partners[3].id
       }
     ]
   });
-  const categories = await prisma.categories.findMany();
-  await prisma.partners.createMany({
+
+  const places = await prisma.place.findMany();
+  await prisma.address.createMany({
     data: [
       {
-        title: 'кафе',
-        requirements: ['быть партнером'],
-        additionalInformation: 'доп. информация',
+        city: 'Сочи',
+        street: 'Курортный проспект',
+        house: '74',
+        latitude: 43.568259,
+        longitude: 39.742147,
+        placeId: places[0].id
+      },
+      {
+        city: 'Сочи',
+        street: 'Виноградная улица',
+        house: '27',
+        latitude: 43.596652,
+        longitude: 39.713004,
+        placeId: places[1].id
+      },
+      {
+        city: 'Сочи',
+        street: 'Войкова',
+        house: '1',
+        latitude: 43.580808,
+        longitude: 39.71866,
+        placeId: places[2].id
+      },
+      {
+        city: 'Сочи',
+        street: 'Новая Заря',
+        house: '7',
+        latitude: 43.605961,
+        longitude: 39.732181,
+        placeId: places[3].id
+      }
+    ]
+  });
+  const categories = await prisma.category.findMany();
+  await prisma.placeToCategory.createMany({
+    data: [
+      {
+        placeId: places[0].id,
         categoryId: categories[0].id
       },
       {
-        title: 'спорт',
-        requirements: ['быть партнером'],
-        additionalInformation: 'доп. информация',
+        placeId: places[1].id,
         categoryId: categories[1].id
       },
       {
-        title: 'детский сад',
-        requirements: ['быть партнером'],
-        additionalInformation: 'доп. информация',
+        placeId: places[2].id,
         categoryId: categories[2].id
       },
       {
-        title: 'клуб',
-        requirements: ['быть партнером'],
-        additionalInformation: 'доп. информация',
+        placeId: places[3].id,
         categoryId: categories[3].id
-      }
-    ]
-  });
-  const places = await prisma.places.findMany();
-  const partners = await prisma.partners.findMany();
-  await prisma.partnersOnPlaces.createMany({
-    data: [
-      {
-        partnersId: partners[0].id,
-        placesId: places[0].id
-      },
-      {
-        partnersId: partners[0].id,
-        placesId: places[1].id
-      },
-      {
-        partnersId: partners[1].id,
-        placesId: places[1].id
-      },
-      {
-        partnersId: partners[2].id,
-        placesId: places[2].id
-      },
-      {
-        partnersId: partners[3].id,
-        placesId: places[3].id
       }
     ]
   });
