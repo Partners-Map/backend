@@ -14,45 +14,56 @@ model User {
   id       String @id @default(uuid())
   email    String @unique
   password String
-  roles    Roles  @relation(fields: [roleId], references: [id])
+  role     Role   @relation(fields: [roleId], references: [id])
   roleId   String
 }
 
-model Roles {
+model Role {
   id    String @id @default(uuid())
   title String @unique
   User  User[]
 }
 
-model Partners {
-  id                    String             @id @default(uuid())
-  title                 String             @unique
-  requirements          String[]
-  additionalInformation String?
-  categories            Categories         @relation(fields: [categoryId], references: [id])
-  categoryId            String
-  PartnersOnPlaces      PartnersOnPlaces[]
+model Partner {
+  id    String  @id @default(uuid())
+  name  String
+  Place Place[]
 }
 
-model Categories {
-  id       String     @id @default(uuid())
-  title    String
-  Partners Partners[]
+model Place {
+  id              String            @id @default(uuid())
+  name            String
+  description     String?
+  conditions      String[]
+  partner         Partner           @relation(fields: [partnerId], references: [id])
+  partnerId       String
+  Address         Address?
+  PlaceToCategory PlaceToCategory[]
 }
 
-model Places {
-  id               String             @id @default(uuid())
-  adress           String
-  latitude         Decimal
-  longitude        Decimal
-  PartnersOnPlaces PartnersOnPlaces[]
+model Address {
+  id        String  @id @default(uuid())
+  city      String
+  street    String
+  house     String?
+  latitude  Decimal
+  longitude Decimal
+  place     Place   @relation(fields: [placeId], references: [id])
+  placeId   String  @unique
 }
 
-model PartnersOnPlaces {
-  partners   Partners @relation(fields: [partnersId], references: [id])
-  places     Places   @relation(fields: [placesId], references: [id])
-  partnersId String
-  placesId   String
+model Category {
+  id              String            @id @default(uuid())
+  title           String            @unique
+  PlaceToCategory PlaceToCategory[]
+}
 
-  @@id([partnersId, placesId])
+model PlaceToCategory {
+  place      Place    @relation(fields: [placeId], references: [id])
+  placeId    String
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  assignedAt DateTime @default(now())
+
+  @@id([placeId, categoryId])
 }
