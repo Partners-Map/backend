@@ -1,33 +1,13 @@
 import autoLoad from '@fastify/autoload';
-import fastifySwagger from '@fastify/swagger';
-import fastifySwaggerUi from '@fastify/swagger-ui';
+import { JsonSchemaToTsProvider } from '@fastify/type-provider-json-schema-to-ts';
 import 'dotenv/config';
 import Fastify from 'fastify';
 import { join } from 'path';
-import { version } from '../package.json';
 import { loggerConfig } from './configs/logger';
 
 const fastify = Fastify({
   logger: loggerConfig[process.env.PROJECT_STATUS] ?? true
-});
-
-console.log(process.env.PROJECT_STATUS);
-
-fastify.register(fastifySwagger, {
-  swagger: {
-    info: {
-      title: 'Partners map',
-      description: 'adadada',
-      version
-    }
-  }
-});
-
-fastify.register(fastifySwaggerUi, {
-  routePrefix: '/docs',
-  staticCSP: true,
-  transformStaticCSP: header => header
-});
+}).withTypeProvider<JsonSchemaToTsProvider>();
 
 fastify.register(autoLoad, {
   dir: join(__dirname, 'plugins')
@@ -40,9 +20,17 @@ fastify.register(autoLoad, {
   }
 });
 
-fastify.listen({ port: 3003 }, (err, address) => {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
+fastify.setErrorHandler((error, request, res) => {
+  fastify.log.error(error);
+  res.status(500).send({ error: 'Internal Server Error' });
 });
+
+fastify.listen(
+  { port: Number(process.env.SERVER_PORT) || 3002 },
+  async (err, address) => {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+  }
+);

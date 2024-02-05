@@ -9,3 +9,50 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  roles    Roles  @relation(fields: [roleId], references: [id])
+  roleId   String
+}
+
+model Roles {
+  id    String @id @default(uuid())
+  title String @unique
+  User  User[]
+}
+
+model Partners {
+  id                    String             @id @default(uuid())
+  title                 String             @unique
+  requirements          String[]
+  additionalInformation String?
+  categories            Categories         @relation(fields: [categoryId], references: [id])
+  categoryId            String
+  PartnersOnPlaces      PartnersOnPlaces[]
+}
+
+model Categories {
+  id       String     @id @default(uuid())
+  title    String
+  Partners Partners[]
+}
+
+model Places {
+  id               String             @id @default(uuid())
+  adress           String
+  latitude         Decimal
+  longitude        Decimal
+  PartnersOnPlaces PartnersOnPlaces[]
+}
+
+model PartnersOnPlaces {
+  partners   Partners @relation(fields: [partnersId], references: [id])
+  places     Places   @relation(fields: [placesId], references: [id])
+  partnersId String
+  placesId   String
+
+  @@id([partnersId, placesId])
+}
