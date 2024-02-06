@@ -30,9 +30,6 @@ export default async (fastify: FastifyInstance) => {
     },
     async (req, rep) => {
       const { id: userId } = req.params;
-      if (!userId) {
-        fastify.log.warn(req.params);
-      }
       rep.code(200).send(await getUserById(fastify, userId));
     }
   );
@@ -127,7 +124,6 @@ export default async (fastify: FastifyInstance) => {
     },
     async (req, res) => {
       const { id: userId } = req.params;
-      const userData = req.body;
       res.code(200).send(await deleteUserById(fastify, userId));
     }
   );

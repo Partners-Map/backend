@@ -6,7 +6,7 @@ export default async (fastify: FastifyInstance) => {
     '/',
     {
       schema: {
-        tags: ['categorie']
+        tags: ['category']
       }
     },
     async (req, rep) => {

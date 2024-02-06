@@ -1,4 +1,4 @@
-import { Places } from '@prisma/client';
+import { Place } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 import {
   createPlace,
@@ -7,7 +7,7 @@ import {
   updatePlace
 } from '../../controllers/place';
 
-export default async (fastify: FastifyInstance) => {
+export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get<{
     Params: {
       id: string;
@@ -33,24 +33,27 @@ export default async (fastify: FastifyInstance) => {
       res.code(200).send(await getPlaceById(fastify, placeId));
     }
   );
-  fastify.post<{ Body: Omit<Places, 'id'> }>(
+  fastify.post<{ Body: Omit<Place, 'id'> }>(
     '/',
     {
       schema: {
         body: {
           type: 'object',
           properties: {
-            adress: {
+            name: {
               type: 'string'
             },
-            latitude: {
+            description: {
               type: 'string'
             },
-            longitude: {
+            conditions: {
+              type: 'string'
+            },
+            partnerId: {
               type: 'string'
             }
           },
-          required: ['adress', 'latitude', 'longitude']
+          required: ['name', 'description', 'conditions', 'partnerId']
         },
         tags: ['place']
       }
@@ -64,7 +67,7 @@ export default async (fastify: FastifyInstance) => {
     Params: {
       id: string;
     };
-    Body: Omit<Places, 'id'>;
+    Body: Omit<Place, 'id'>;
   }>(
     '/:id',
     {
@@ -81,25 +84,28 @@ export default async (fastify: FastifyInstance) => {
         body: {
           type: 'object',
           properties: {
-            adress: {
+            name: {
               type: 'string'
             },
-            latitude: {
+            description: {
               type: 'string'
             },
-            longitude: {
+            conditions: {
+              type: 'string'
+            },
+            partnerId: {
               type: 'string'
             }
           },
-          required: ['adress', 'latitude', 'longitude']
+          required: ['name', 'description', 'conditions', 'partnerId']
         },
         tags: ['place']
       }
     },
     async (req, res) => {
       const { id: placeId } = req.params;
-      const createdData = req.body;
-      res.code(200).send(await updatePlace(fastify, placeId, createdData));
+      const updatedData = req.body;
+      res.code(200).send(await updatePlace(fastify, placeId, updatedData));
     }
   );
   fastify.delete<{
@@ -124,7 +130,7 @@ export default async (fastify: FastifyInstance) => {
     },
     async (req, rep) => {
       const { id: placeId } = req.params;
-      fastify.log.warn(placeId);
+      
       rep.code(200).send(await deletePlace(fastify, placeId));
     }
   );
