@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify/types/instance';
 import { getAllRoles } from '../../controllers/role';
 
-export default async (fastify: FastifyInstance) => {
+export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get(
     '/',
     {
