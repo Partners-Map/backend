@@ -4,6 +4,7 @@ import {
   createPlace,
   deletePlace,
   getPlaceById,
+  getPlaceByIdWithAdress,
   updatePlace
 } from '../../controllers/place';
 
@@ -31,6 +32,31 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     async (req, res) => {
       const { id: placeId } = req.params;
       res.code(200).send(await getPlaceById(fastify, placeId));
+    }
+  );
+  fastify.get<{
+    Params: {
+      id: string;
+    };
+  }>(
+    '/withAddress/:id',
+    {
+      schema: {
+        params: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string'
+            }
+          },
+          required: ['id']
+        },
+        tags: ['place']
+      }
+    },
+    async (req, res) => {
+      const { id: placeId } = req.params;
+      res.code(200).send(await getPlaceByIdWithAdress(fastify, placeId));
     }
   );
   fastify.post<{ Body: Omit<Place, 'id'> }>(
@@ -130,7 +156,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     },
     async (req, rep) => {
       const { id: placeId } = req.params;
-      
+
       rep.code(200).send(await deletePlace(fastify, placeId));
     }
   );
