@@ -6,8 +6,14 @@ import {
   getUserById,
   updateUser
 } from '../../controllers/user';
+import {
+  createUserRequestSchema,
+  deleteUserByIdRequestSchema,
+  getUserByIdRequestShema,
+  updateUserRequestSchema
+} from '../../schemas/requests/user';
 
-export default async (fastify: FastifyInstance) => {
+export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get<{
     Params: {
       id: string;
@@ -15,18 +21,7 @@ export default async (fastify: FastifyInstance) => {
   }>(
     '/:id',
     {
-      schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        tags: ['user']
-      }
+      schema: { ...getUserByIdRequestShema }
     },
     async (req, rep) => {
       const { id: userId } = req.params;
@@ -36,24 +31,7 @@ export default async (fastify: FastifyInstance) => {
   fastify.post<{ Body: TCreateUserReq }>(
     '/',
     {
-      schema: {
-        body: {
-          type: 'object',
-          properties: {
-            email: {
-              type: 'string'
-            },
-            password: {
-              type: 'string'
-            },
-            roleId: {
-              type: 'string'
-            }
-          },
-          required: ['email', 'password', 'roleId']
-        },
-        tags: ['user']
-      }
+      schema: { ...createUserRequestSchema }
     },
     async (req, res) => {
       const user = req.body;
@@ -68,33 +46,7 @@ export default async (fastify: FastifyInstance) => {
   }>(
     '/:id',
     {
-      schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        body: {
-          type: 'object',
-          properties: {
-            email: {
-              type: 'string'
-            },
-            password: {
-              type: 'string'
-            },
-            roleId: {
-              type: 'string'
-            }
-          },
-          required: ['email', 'password', 'roleId']
-        },
-        tags: ['user']
-      }
+      schema: { ...updateUserRequestSchema }
     },
     async (req, res) => {
       const { id: userId } = req.params;
@@ -109,18 +61,7 @@ export default async (fastify: FastifyInstance) => {
   }>(
     '/:id',
     {
-      schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        tags: ['user']
-      }
+      schema: { ...deleteUserByIdRequestSchema }
     },
     async (req, res) => {
       const { id: userId } = req.params;

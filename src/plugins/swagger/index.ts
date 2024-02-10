@@ -5,7 +5,7 @@ import { version } from '../../../package.json';
 
 export default fp(async fastify => {
   fastify.register(fastifySwagger, {
-    swagger: {
+    openapi: {
       info: {
         title: 'Partners map',
         version
@@ -15,6 +15,9 @@ export default fp(async fastify => {
 
   fastify.register(fastifySwaggerUi, {
     routePrefix: '/docs',
+    uiConfig: {
+      deepLinking: true
+    },
     staticCSP: true,
     transformStaticCSP: header => header
   });
