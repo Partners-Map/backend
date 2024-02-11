@@ -1,15 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import fp from 'fastify-plugin';
-import { databaseConfig } from '../../configs/database';
 
 const initDatabaseConnection = async (): Promise<PrismaClient> => {
-  const db = new PrismaClient({
-    datasources: {
-      db: {
-        url: databaseConfig.databaseURL
-      }
-    }
-  });
+  const db = new PrismaClient();
   await db.$connect();
   return db;
 };
