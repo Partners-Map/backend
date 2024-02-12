@@ -13,28 +13,28 @@ const prisma = new PrismaClient();
       }
     ]
   });
-  const roles = await prisma.role.findMany();
+  const [adminRole, partnerRole] = await prisma.role.findMany();
   await prisma.user.createMany({
     data: [
       {
         email: 'admin@example.com',
         password: 'qwerty123',
-        roleId: roles[0].id
+        roleId: adminRole.id
       },
       {
         email: 'partner@example.com',
         password: 'qwerty123',
-        roleId: roles[1].id
+        roleId: partnerRole.id
       },
       {
         email: 'user1@example.com',
         password: 'qwerty123',
-        roleId: roles[1].id
+        roleId: partnerRole.id
       },
       {
         email: 'user2@example.com',
         password: 'qwerty123',
-        roleId: roles[1].id
+        roleId: partnerRole.id
       }
     ]
   });
