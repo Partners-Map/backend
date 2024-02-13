@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify/types/instance';
-import { getAllUsers } from '../../controllers/user';
+import { getAllUsers } from '../../services/user';
 
 export default async (fastify: FastifyInstance) => {
   fastify.get(

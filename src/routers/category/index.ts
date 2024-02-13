@@ -4,7 +4,7 @@ import {
   createCategorie,
   updateCategorie,
   deleteCategorie
-} from '../../controllers/category';
+} from '../../services/category';
 
 export default async (fastify: FastifyInstance) => {
   fastify.get<{

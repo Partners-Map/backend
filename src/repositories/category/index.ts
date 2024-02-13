@@ -5,10 +5,7 @@ export const getAllCategories = async (fastify: FastifyInstance): Promise<Catego
   return await fastify.prisma.category.findMany();
 };
 
-export const getCategorieById = async (
-  fastify: FastifyInstance,
-  categoryId: string
-): Promise<Category> => {
+export const getCategorieById = async (fastify: FastifyInstance, categoryId: string): Promise<Category> => {
   return await fastify.prisma.category.findUnique({
     where: {
       id: categoryId
@@ -16,10 +13,7 @@ export const getCategorieById = async (
   });
 };
 
-export const createCategorie = async (
-  fastify: FastifyInstance,
-  title: string
-): Promise<Category> => {
+export const createCategorie = async (fastify: FastifyInstance, title: string): Promise<Category> => {
   return await fastify.prisma.category.create({
     data: {
       title
@@ -42,10 +36,7 @@ export const updateCategorie = async (
   });
 };
 
-export const deleteCategorie = async (
-  fastify: FastifyInstance,
-  categoryId: string
-): Promise<Category> => {
+export const deleteCategorie = async (fastify: FastifyInstance, categoryId: string): Promise<Category> => {
   await fastify.prisma.placeToCategory.deleteMany({
     where: {
       categoryId: categoryId

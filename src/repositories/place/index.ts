@@ -5,10 +5,7 @@ export const getAllPlaces = async (fastify: FastifyInstance): Promise<Place[]> =
   return await fastify.prisma.place.findMany();
 };
 
-export const getPlaceById = async (
-  fastify: FastifyInstance,
-  placeId: string
-): Promise<Place> => {
+export const getPlaceById = async (fastify: FastifyInstance, placeId: string): Promise<Place> => {
   return await fastify.prisma.place.findUnique({
     where: {
       id: placeId
@@ -16,10 +13,7 @@ export const getPlaceById = async (
   });
 };
 
-export const getPlaceByIdWithAdress = async (
-  fastify: FastifyInstance,
-  placeId: string
-): Promise<any> => {
+export const getPlaceByIdWithAdress = async (fastify: FastifyInstance, placeId: string): Promise<any> => {
   return await fastify.prisma.place.findUnique({
     where: {
       id: placeId
@@ -62,10 +56,7 @@ export const updatePlace = async (
   });
 };
 
-export const deletePlace = async (
-  fastify: FastifyInstance,
-  placeId: string
-): Promise<Place> => {
+export const deletePlace = async (fastify: FastifyInstance, placeId: string): Promise<Place> => {
   await fastify.prisma.placeToCategory.deleteMany({
     where: {
       placeId: placeId

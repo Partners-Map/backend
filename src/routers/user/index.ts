@@ -1,11 +1,6 @@
 import { FastifyInstance } from 'fastify/types/instance';
 import { TCreateUserReq } from '../../@types/req/user';
-import {
-  createUser,
-  deleteUserById,
-  getUserById,
-  updateUser
-} from '../../controllers/user';
+import { createUser, deleteUserById, getUserById, updateUser } from '../../services/user';
 import {
   createUserRequestSchema,
   deleteUserByIdRequestSchema,

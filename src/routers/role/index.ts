@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { createRole, deleteRole, getRoleById, updateRole } from '../../controllers/role';
+import { createRole, deleteRole, getRoleById, updateRole } from '../../services/role';
 
 export default async (fastify: FastifyInstance) => {
   fastify.get<{

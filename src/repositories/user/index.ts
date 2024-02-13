@@ -2,14 +2,11 @@ import type { User } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 import { TCreateUserReq } from '../../@types/req/user';
 
-export const getAllUsers = async (fastify: FastifyInstance): Promise<User[]> => {
+export const findAll = async (fastify: FastifyInstance): Promise<User[]> => {
   return await fastify.prisma.user.findMany();
 };
 
-export const getUserById = async (
-  fastify: FastifyInstance,
-  userId: string
-): Promise<User> => {
+export const findById = async (fastify: FastifyInstance, userId: string): Promise<User> => {
   return await fastify.prisma.user.findUnique({
     where: {
       id: userId
@@ -17,26 +14,22 @@ export const getUserById = async (
   });
 };
 
-export const createUser = (
-  fastify: FastifyInstance,
-  createdData: TCreateUserReq
-): Promise<User> => {
-  const newUser = fastify.prisma.user.create({
+export const create = async (fastify: FastifyInstance, createdData: TCreateUserReq): Promise<User> => {
+  return await fastify.prisma.user.create({
     data: {
       email: createdData.email,
       password: createdData.password,
       roleId: createdData.roleId
     }
   });
-  return newUser;
 };
 
-export const updateUser = (
+export const updateById = async (
   fastify: FastifyInstance,
   userId: string,
   updatedData: TCreateUserReq
 ): Promise<User> => {
-  const updatedUser = fastify.prisma.user.update({
+  return await fastify.prisma.user.update({
     where: {
       id: userId
     },
@@ -46,17 +39,12 @@ export const updateUser = (
       roleId: updatedData.roleId
     }
   });
-  return updatedUser;
 };
 
-export const deleteUserById = async (
-  fastify: FastifyInstance,
-  userId: string
-): Promise<User> => {
-  const deletedUser = fastify.prisma.user.delete({
+export const deleteById = async (fastify: FastifyInstance, userId: string): Promise<User> => {
+  return await fastify.prisma.user.delete({
     where: {
       id: userId
     }
   });
-  return deletedUser;
 };

@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify/types/instance';
-import { getAllCategories } from '../../controllers/category';
+import { getAllCategories } from '../../services/category';
 
 export default async (fastify: FastifyInstance) => {
   fastify.get(
