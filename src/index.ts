@@ -25,9 +25,15 @@ fastify.setErrorHandler((error, request, res) => {
   res.status(500).send({ error: 'Internal Server Error' });
 });
 
-fastify.listen({ port: Number(process.env.SERVER_PORT) || 3002 }, async (err, address) => {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
+fastify.listen(
+  {
+    port: Number(process.env.SERVER_PORT) || 3002,
+    host: process.env.PROJECT_STATUS === 'production' ? '0.0.0.0' : 'localhost'
+  },
+  async (err, address) => {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
   }
-});
+);

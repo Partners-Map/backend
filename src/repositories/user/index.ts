@@ -7,7 +7,6 @@ export const findAll = async (fastify: FastifyInstance): Promise<User[]> => {
 };
 
 export const findById = async (fastify: FastifyInstance, userId: string): Promise<User> => {
-  fastify.log.warn(userId);
   return await fastify.prisma.user.findUnique({
     where: {
       id: userId
