@@ -2,7 +2,11 @@ import { Place } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 
 export const getAllPlaces = async (fastify: FastifyInstance): Promise<Place[]> => {
-  return await fastify.prisma.place.findMany();
+  return await fastify.prisma.place.findMany({
+    include: {
+      Address: true
+    }
+  });
 };
 
 export const getPlaceById = async (fastify: FastifyInstance, placeId: string): Promise<Place> => {
