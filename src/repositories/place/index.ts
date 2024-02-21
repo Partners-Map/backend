@@ -13,13 +13,13 @@ export const getPlaceById = async (fastify: FastifyInstance, placeId: string): P
   });
 };
 
-export const getPlaceByIdWithAdress = async (fastify: FastifyInstance, placeId: string): Promise<any> => {
+export const getPlaceByIdWithAddress = async (fastify: FastifyInstance, placeId: string): Promise<any> => {
   return await fastify.prisma.place.findUnique({
     where: {
       id: placeId
     },
     include: {
-      Address: true
+      address: true
     }
   });
 };

@@ -34,11 +34,30 @@ model Place {
   id              String            @id @default(uuid())
   name            String
   description     String?
-  conditions      String[]
+  avgReceipt      Int
+  kitchen         String?
   partner         Partner           @relation(fields: [partnerId], references: [id])
   partnerId       String
-  Address         Address?
+  address         Address[]
   PlaceToCategory PlaceToCategory[]
+  Discount   Discount? @relation(fields: [discountId], references: [id])
+  discountId String?
+}
+
+model Discount {
+  id             String       @id @default(uuid())
+  conditions     String[]
+  amount         Int
+  information    String?
+  discountType   DiscountType @relation(fields: [discountTypeId], references: [id])
+  discountTypeId String
+  place          Place[]
+}
+
+model DiscountType {
+  id       String     @id @default(uuid())
+  title    String     @unique
+  Discount Discount[]
 }
 
 model Address {

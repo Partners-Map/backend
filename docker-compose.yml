@@ -26,8 +26,8 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     environment:
-      DB_HOST: ${DB_HOST}
-      DATABASE_URL: postgresql://myuser:mypassword@partners-db:5432/prisma?schema=public
+      DB_HOST: partners-db
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@partners-db:${DB_PORT}/${DB_NAME}?schema=public
     depends_on:
       - partners-db
     networks:

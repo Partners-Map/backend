@@ -4,7 +4,7 @@ import {
   createPlace,
   deletePlace,
   getPlaceById,
-  getPlaceByIdWithAdress,
+  getPlaceByIdWithAddress,
   updatePlace
 } from '../../services/place';
 
@@ -56,7 +56,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     },
     async (req, res) => {
       const { id: placeId } = req.params;
-      res.code(200).send(await getPlaceByIdWithAdress(fastify, placeId));
+      res.code(200).send(await getPlaceByIdWithAddress(fastify, placeId));
     }
   );
   fastify.post<{ Body: Omit<Place, 'id'> }>(
