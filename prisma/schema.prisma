@@ -21,50 +21,52 @@ model User {
 model Role {
   id    String @id @default(uuid())
   title String @unique
-  User  User[]
+  user  User[]
 }
 
 model Partner {
   id    String  @id @default(uuid())
-  name  String
-  Place Place[]
+  name  String  @unique
+  place Place[]
 }
 
 model Place {
   id              String            @id @default(uuid())
   name            String
-  description     String?
-  avgReceipt      Int
-  kitchen         String?
+  description     String?           @default("")
+  avgReceipt      Int               @default(1)
+  kitchen         String?           @default("")
   partner         Partner           @relation(fields: [partnerId], references: [id])
   partnerId       String
   address         Address[]
-  PlaceToCategory PlaceToCategory[]
-  Discount   Discount? @relation(fields: [discountId], references: [id])
-  discountId String?
+  placeToCategory PlaceToCategory[]
+  discount        Discount          @relation(fields: [discountId], references: [id])
+  discountId      String
 }
 
 model Discount {
   id             String       @id @default(uuid())
   conditions     String[]
-  amount         Int
-  information    String?
+  amount         Int          @default(0)
+  information    String       @default("")
   discountType   DiscountType @relation(fields: [discountTypeId], references: [id])
   discountTypeId String
   place          Place[]
+
+  @@unique([conditions, amount, information, discountTypeId])
 }
 
 model DiscountType {
   id       String     @id @default(uuid())
   title    String     @unique
-  Discount Discount[]
+  discount Discount[]
 }
 
 model Address {
   id        String  @id @default(uuid())
   city      String
   street    String
-  house     String?
+  house     String? @default("")
   latitude  Decimal
   longitude Decimal
   place     Place   @relation(fields: [placeId], references: [id])
@@ -74,7 +76,7 @@ model Address {
 model Category {
   id              String            @id @default(uuid())
   title           String            @unique
-  PlaceToCategory PlaceToCategory[]
+  placeToCategory PlaceToCategory[]
 }
 
 model PlaceToCategory {

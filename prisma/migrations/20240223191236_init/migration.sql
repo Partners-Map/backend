@@ -28,11 +28,11 @@ CREATE TABLE "Partner" (
 CREATE TABLE "Place" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "description" TEXT,
-    "avgReceipt" INTEGER NOT NULL,
-    "kitchen" TEXT,
+    "description" TEXT DEFAULT '',
+    "avgReceipt" INTEGER NOT NULL DEFAULT 1,
+    "kitchen" TEXT DEFAULT '',
     "partnerId" TEXT NOT NULL,
-    "discountId" TEXT,
+    "discountId" TEXT NOT NULL,
 
     CONSTRAINT "Place_pkey" PRIMARY KEY ("id")
 );
@@ -41,8 +41,8 @@ CREATE TABLE "Place" (
 CREATE TABLE "Discount" (
     "id" TEXT NOT NULL,
     "conditions" TEXT[],
-    "amount" INTEGER NOT NULL,
-    "information" TEXT,
+    "amount" INTEGER NOT NULL DEFAULT 0,
+    "information" TEXT NOT NULL DEFAULT '',
     "discountTypeId" TEXT NOT NULL,
 
     CONSTRAINT "Discount_pkey" PRIMARY KEY ("id")
@@ -61,7 +61,7 @@ CREATE TABLE "Address" (
     "id" TEXT NOT NULL,
     "city" TEXT NOT NULL,
     "street" TEXT NOT NULL,
-    "house" TEXT,
+    "house" TEXT DEFAULT '',
     "latitude" DECIMAL(65,30) NOT NULL,
     "longitude" DECIMAL(65,30) NOT NULL,
     "placeId" TEXT NOT NULL,
@@ -93,6 +93,12 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "Role_title_key" ON "Role"("title");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Partner_name_key" ON "Partner"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Discount_conditions_amount_information_discountTypeId_key" ON "Discount"("conditions", "amount", "information", "discountTypeId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "DiscountType_title_key" ON "DiscountType"("title");
 
 -- CreateIndex
@@ -108,7 +114,7 @@ ALTER TABLE "User" ADD CONSTRAINT "User_roleId_fkey" FOREIGN KEY ("roleId") REFE
 ALTER TABLE "Place" ADD CONSTRAINT "Place_partnerId_fkey" FOREIGN KEY ("partnerId") REFERENCES "Partner"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Place" ADD CONSTRAINT "Place_discountId_fkey" FOREIGN KEY ("discountId") REFERENCES "Discount"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Place" ADD CONSTRAINT "Place_discountId_fkey" FOREIGN KEY ("discountId") REFERENCES "Discount"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Discount" ADD CONSTRAINT "Discount_discountTypeId_fkey" FOREIGN KEY ("discountTypeId") REFERENCES "DiscountType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
