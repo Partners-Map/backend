@@ -1666,6 +1666,276 @@ const prisma = new PrismaClient();
       }
     }
   });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Транспортная',
+      house: '74/5а',
+      latitude: 43.589364,
+      longitude: 39.75718,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Цветочный дом',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Донская',
+      house: '3',
+      latitude: 43.608577,
+      longitude: 39.731452,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Цветочный дом',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Калараша',
+      house: '141',
+      latitude: 43.913071,
+      longitude: 39.340011,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Цветочный дом',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Карла Маркса',
+      house: '12',
+      latitude: 44.097608,
+      longitude: 39.077011,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Цветочный дом',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Эстосадок',
+      street: 'Горная Карусель',
+      house: '5',
+      latitude: 43.683928,
+      longitude: 40.264997,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Tirol club',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Эстосадок',
+      street: 'Железнодорожная',
+      house: '9/1а',
+      latitude: 43.508494,
+      longitude: 39.867493,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'SurfTeamSochi',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Несебрская',
+      house: '9/1а',
+      latitude: 43.581907,
+      longitude: 39.718507,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Na_yachte',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сириус',
+      street: '​Олимпийский проспект',
+      house: '3',
+      latitude: 43.411603,
+      longitude: 39.950452,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Омега Сириус',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сириус',
+      street: 'Триумфальный проезд',
+      house: '1',
+      latitude: 43.412297,
+      longitude: 39.965957,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Дельта Сириус',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сириус',
+      street: 'Морской бульвар',
+      house: '1',
+      latitude: 43.411465,
+      longitude: 39.93581,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Альфа Сириус',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Эстосадок',
+      street: '​Сулимовка',
+      house: '9',
+      latitude: 43.664661,
+      longitude: 40.314737,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Green Flow',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Курортный проспект',
+      house: '89',
+      latitude: 43.562666,
+      longitude: 39.756614,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Swissotel Resort Сочи Камелия',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сириус',
+      street: 'Международная',
+      house: '10Б',
+      latitude: 43.404765,
+      longitude: 39.96496,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: '"Сочи-Парк" ​Тематический парк развлечений',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сириус',
+      street: 'Олимпийский проспект',
+      house: '21к2',
+      latitude: 43.403606,
+      longitude: 39.964241,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: '"Сочи-Парк" ​Тематический парк развлечений',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Московская',
+      house: '10',
+      latitude: 43.592825,
+      longitude: 39.726197,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: '"Top" ​Компьютерная академия',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
 })()
   .then(async () => {
     await prisma.$disconnect();

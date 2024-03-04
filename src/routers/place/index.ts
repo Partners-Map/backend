@@ -1,11 +1,11 @@
 import { Place } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 import {
-  createPlace,
+  // createPlace,
   deletePlace,
   getPlaceById,
-  getPlaceByIdWithAddress,
-  updatePlace
+  getPlaceByIdWithAddress
+  // updatePlace
 } from '../../services/place';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
@@ -86,7 +86,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     },
     async (req, res) => {
       const createdData = req.body;
-      res.code(200).send(await createPlace(fastify, createdData));
+      // res.code(200).send(await createPlace(fastify, createdData));
     }
   );
   fastify.put<{
@@ -131,7 +131,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     async (req, res) => {
       const { id: placeId } = req.params;
       const updatedData = req.body;
-      res.code(200).send(await updatePlace(fastify, placeId, updatedData));
+      // res.code(200).send(await updatePlace(fastify, placeId, updatedData));
     }
   );
   fastify.delete<{
