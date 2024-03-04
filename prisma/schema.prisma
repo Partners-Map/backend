@@ -32,7 +32,7 @@ model Partner {
 
 model Place {
   id              String            @id @default(uuid())
-  name            String
+  title           String
   description     String?           @default("")
   avgReceipt      Int               @default(1)
   kitchen         String?           @default("")
@@ -42,6 +42,8 @@ model Place {
   placeToCategory PlaceToCategory[]
   discount        Discount          @relation(fields: [discountId], references: [id])
   discountId      String
+
+  @@unique([title, description, kitchen])
 }
 
 model Discount {
@@ -66,11 +68,11 @@ model Address {
   id        String  @id @default(uuid())
   city      String
   street    String
-  house     String? @default("")
+  house     String
   latitude  Decimal
   longitude Decimal
   place     Place   @relation(fields: [placeId], references: [id])
-  placeId   String  @unique
+  placeId   String
 }
 
 model Category {

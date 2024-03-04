@@ -180,7 +180,7 @@ const prisma = new PrismaClient();
   const [discountT, cashbackT] = await prisma.discountType.findMany();
   await prisma.place.create({
     data: {
-      name: 'Ресторан Barceloneta',
+      title: 'Ресторан Barceloneta',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -204,7 +204,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Ресторан ЛондонЪ',
+      title: 'Ресторан ЛондонЪ',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -230,7 +230,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'SeaBus',
+      title: 'SeaBus',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -256,7 +256,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Мясной синдикат',
+      title: 'Мясной синдикат',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -282,7 +282,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Хмели-Сунели',
+      title: 'Хмели-Сунели',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -308,7 +308,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Япона Мама',
+      title: 'Япона Мама',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -334,7 +334,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Дон Кихотзе',
+      title: 'Дон КихотДзе',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -360,7 +360,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Sea Zone',
+      title: 'Sea Zone',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -386,7 +386,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Magellan',
+      title: 'Magellan',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -412,7 +412,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Дельфин и Русалка',
+      title: 'Дельфин и Русалка',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -432,7 +432,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Морской',
+      title: 'Морской',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -454,7 +454,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Pita street',
+      title: 'Pita street',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -476,7 +476,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Мой кофе',
+      title: 'Мой кофе',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -496,7 +496,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Frida',
+      title: 'Frida',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -515,7 +515,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Зацепи',
+      title: 'Зацепи',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -536,7 +536,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Итэлия',
+      title: 'Итэлия',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -557,7 +557,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Best food Sochi',
+      title: 'Best food Sochi',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -577,7 +577,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Domileo',
+      title: 'Domileo',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -597,7 +597,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Hooknrolla',
+      title: 'Hooknrolla',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -620,7 +620,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Сицилия',
+      title: 'Сицилия',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -644,7 +644,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'SimpleWine',
+      title: 'SimpleWine',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -664,7 +664,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Pushkin',
+      title: 'Pushkin',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -683,7 +683,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'City Thai Spa',
+      title: 'City Thai Spa',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -705,7 +705,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Classic',
+      title: 'Classic',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -727,7 +727,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Don’t drama',
+      title: 'Don’t drama',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -746,7 +746,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Loren',
+      title: 'Loren',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -768,7 +768,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Бест-Клининг',
+      title: 'Бест-Клининг',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -787,7 +787,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'World Class',
+      title: 'World Class',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -807,7 +807,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Iskra Sochi',
+      title: 'Iskra Sochi',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -830,7 +830,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Ru_testo',
+      title: 'Ru_testo',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -849,7 +849,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Цветочный дом',
+      title: 'Цветочный дом',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -869,7 +869,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Tirol club',
+      title: 'Tirol club',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -890,7 +890,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'SurfTeamSochi',
+      title: 'SurfTeamSochi',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -915,7 +915,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Na_yachte',
+      title: 'Na_yachte',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -935,7 +935,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Омега Сириус',
+      title: 'Омега Сириус',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -955,7 +955,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Дельта Сириус',
+      title: 'Дельта Сириус',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -977,7 +977,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Альфа Сириус',
+      title: 'Альфа Сириус',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -999,7 +999,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Green Flow',
+      title: 'Green Flow',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -1019,7 +1019,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Swissotel Resort Сочи Камелия',
+      title: 'Swissotel Resort Сочи Камелия',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -1044,7 +1044,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: '"Сочи-Парк" ​Тематический парк развлечений',
+      title: '"Сочи-Парк" ​Тематический парк развлечений',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -1068,7 +1068,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: '"Top" ​Компьютерная академия',
+      title: '"Top" ​Компьютерная академия',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -1089,7 +1089,7 @@ const prisma = new PrismaClient();
   });
   await prisma.place.create({
     data: {
-      name: 'Learn to Learn',
+      title: 'Learn to Learn',
       description: '',
       avgReceipt: 1,
       discount: {
@@ -1108,64 +1108,564 @@ const prisma = new PrismaClient();
     }
   });
 
-  // const places = await prisma.place.findMany();
-  // await prisma.address.createMany({
-  //   data: [
-  //     {
-  //       city: 'Сочи',
-  //       street: 'Курортный проспект',
-  //       house: '74',
-  //       latitude: 43.568259,
-  //       longitude: 39.742147,
-  //       placeId: places[0].id
-  //     },
-  //     {
-  //       city: 'Сочи',
-  //       street: 'Виноградная улица',
-  //       house: '27',
-  //       latitude: 43.596652,
-  //       longitude: 39.713004,
-  //       placeId: places[1].id
-  //     },
-  //     {
-  //       city: 'Сочи',
-  //       street: 'Войкова',
-  //       house: '1',
-  //       latitude: 43.580808,
-  //       longitude: 39.71866,
-  //       placeId: places[2].id
-  //     },
-  //     {
-  //       city: 'Сочи',
-  //       street: 'Новая Заря',
-  //       house: '7',
-  //       latitude: 43.605961,
-  //       longitude: 39.732181,
-  //       placeId: places[3].id
-  //     }
-  //   ]
-  // });
-  // const categories = await prisma.category.findMany();
-  // await prisma.placeToCategory.createMany({
-  //   data: [
-  //     {
-  //       placeId: places[0].id,
-  //       categoryId: categories[0].id
-  //     },
-  //     {
-  //       placeId: places[1].id,
-  //       categoryId: categories[1].id
-  //     },
-  //     {
-  //       placeId: places[2].id,
-  //       categoryId: categories[2].id
-  //     },
-  //     {
-  //       placeId: places[3].id,
-  //       categoryId: categories[3].id
-  //     }
-  //   ]
-  // });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Несебрская',
+      house: '6',
+      latitude: 43.582038,
+      longitude: 39.719235,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Ресторан Barceloneta',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Несебрская',
+      house: '6',
+      latitude: 43.582038,
+      longitude: 39.719235,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Ресторан ЛондонЪ',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Орджоникидзе',
+      house: '5а',
+      latitude: 43.578576,
+      longitude: 39.723933,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'SeaBus',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Орджоникидзе',
+      house: '4б',
+      latitude: 43.578838,
+      longitude: 39.724382,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Мясной синдикат',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Курортный проспект',
+      house: '50в',
+      latitude: 43.578838,
+      longitude: 39.724382,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Хмели-Сунели',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Орджоникидзе',
+      house: '25а',
+      latitude: 43.574875,
+      longitude: 39.728707,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Япона Мама',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Приморская',
+      house: '17',
+      latitude: 43.573266,
+      longitude: 39.726848,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Дон КихотДзе',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Приморская',
+      house: '17а',
+      latitude: 43.572909,
+      longitude: 39.727184,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Sea Zone',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Урицкого',
+      house: '18Ак2',
+      latitude: 43.3889,
+      longitude: 39.984013,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Magellan',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Войкова',
+      house: '1/5',
+      latitude: 43.580843,
+      longitude: 39.718615,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Дельфин и Русалка',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Войкова',
+      house: '1',
+      latitude: 43.580843,
+      longitude: 39.718615,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Морской',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Несебрская',
+      house: '1/2',
+      latitude: 43.58051,
+      longitude: 39.719334,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Pita street',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Войкова',
+      house: '4в',
+      latitude: 43.58064,
+      longitude: 39.720259,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Мой кофе',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Войкова',
+      house: '1/1',
+      latitude: 43.58051,
+      longitude: 39.719702,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Frida',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Приморская',
+      house: '3/10',
+      latitude: 43.57727,
+      longitude: 39.722334,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Зацепи',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Пластунская',
+      house: '123Ак2',
+      latitude: 43.61607,
+      longitude: 39.737713,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Best food Sochi',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Войкова',
+      house: '1/1',
+      latitude: 43.61607,
+      longitude: 39.737713,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Domileo',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Навагинская',
+      house: '11к5',
+      latitude: 43.595201,
+      longitude: 39.725873,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Сицилия',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Горького',
+      house: '53',
+      latitude: 43.589971,
+      longitude: 39.726224,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'SimpleWine',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Эстосадок',
+      street: 'Времена Года',
+      house: '3',
+      latitude: 43.683119,
+      longitude: 40.25985,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'SimpleWine',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Воровского',
+      house: '5',
+      latitude: 43.586602,
+      longitude: 39.719558,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Pushkin',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Черноморская',
+      house: '6',
+      latitude: 43.569897,
+      longitude: 39.733949,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'City Thai Spa',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Курортный проспект',
+      house: '92/5',
+      latitude: 43.562463,
+      longitude: 39.761824,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'City Thai Spa',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Плеханова',
+      house: '34б',
+      latitude: 43.627073,
+      longitude: 39.700873,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'City Thai Spa',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Воровского',
+      house: '5',
+      latitude: 43.586602,
+      longitude: 39.719558,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Classic',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Трунова',
+      house: '6к1',
+      latitude: 43.593569,
+      longitude: 39.735198,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Don’t drama',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Виноградная',
+      house: '20',
+      latitude: 43.604276,
+      longitude: 39.719136,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Loren',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Курортный проспект',
+      house: '16',
+      latitude: 43.584388,
+      longitude: 39.720277,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Бест-Клининг',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Демократическая',
+      house: '52',
+      latitude: 43.426401,
+      longitude: 39.927599,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Бест-Клининг',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Островского',
+      house: '9',
+      latitude: 43.585766,
+      longitude: 39.72078,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Iskra Sochi',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: '​Яна Фабрициуса',
+      house: '58/2',
+      latitude: 43.58608,
+      longitude: 39.755051,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Ru_testo',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
 })()
   .then(async () => {
     await prisma.$disconnect();
