@@ -1,50 +1,43 @@
-import { Category } from '@prisma/client';
+import { Category as TCategory } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 
-export const getAllCategories = async (fastify: FastifyInstance): Promise<Category[]> => {
-  return await fastify.prisma.category.findMany();
-};
+const getAll = async (fastify: FastifyInstance): Promise<TCategory[]> => fastify.prisma.category.findMany();
 
-export const getCategorieById = async (fastify: FastifyInstance, categoryId: string): Promise<Category> => {
-  return await fastify.prisma.category.findUnique({
+const getById = async (fastify: FastifyInstance, categoryId: string): Promise<TCategory> =>
+  await fastify.prisma.category.findUnique({
     where: {
       id: categoryId
     }
   });
-};
 
-export const createCategorie = async (fastify: FastifyInstance, title: string): Promise<Category> => {
-  return await fastify.prisma.category.create({
-    data: {
-      title
-    }
+const create = async (fastify: FastifyInstance, createdData: Omit<TCategory, 'id'>): Promise<TCategory> =>
+  await fastify.prisma.category.create({
+    data: createdData
   });
-};
 
-export const updateCategorie = async (
+const update = async (
   fastify: FastifyInstance,
-  categoryId: string,
-  newTitle: string
-): Promise<Category> => {
-  return await fastify.prisma.category.update({
+  updatebleId: string,
+  updatebleData: Omit<TCategory, 'id'>
+): Promise<TCategory> =>
+  await fastify.prisma.category.update({
     where: {
-      id: categoryId
+      id: updatebleId
     },
-    data: {
-      title: newTitle
-    }
+    data: updatebleData
   });
-};
 
-export const deleteCategorie = async (fastify: FastifyInstance, categoryId: string): Promise<Category> => {
+const remove = async (fastify: FastifyInstance, removableId: string): Promise<TCategory> => {
   await fastify.prisma.placeToCategory.deleteMany({
     where: {
-      categoryId: categoryId
+      categoryId: removableId
     }
   });
   return await fastify.prisma.category.delete({
     where: {
-      id: categoryId
+      id: removableId
     }
   });
 };
+
+export default { getAll, getById, create, update, remove };

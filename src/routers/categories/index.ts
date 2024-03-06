@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify/types/instance';
-import { getAllCategories } from '../../services/category';
+import CategoryService from '../../services/category';
 
-export default async (fastify: FastifyInstance) => {
+export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get(
     '/',
     {
@@ -10,7 +10,7 @@ export default async (fastify: FastifyInstance) => {
       }
     },
     async (req, rep) => {
-      rep.code(200).send(await getAllCategories(fastify));
+      rep.code(200).send(await CategoryService.getAll(fastify));
     }
   );
 };
