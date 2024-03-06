@@ -2,7 +2,7 @@ import { Place } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 import {
   // createPlace,
-  deletePlace,
+  // deletePlace,
   getPlaceById,
   getPlaceByIdWithAddress
   // updatePlace
@@ -134,30 +134,30 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       // res.code(200).send(await updatePlace(fastify, placeId, updatedData));
     }
   );
-  fastify.delete<{
-    Params: {
-      id: string;
-    };
-  }>(
-    '/:id',
-    {
-      schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        tags: ['place']
-      }
-    },
-    async (req, rep) => {
-      const { id: placeId } = req.params;
+  // fastify.delete<{
+  //   Params: {
+  //     id: string;
+  //   };
+  // }>(
+  //   '/:id',
+  //   {
+  //     schema: {
+  //       params: {
+  //         type: 'object',
+  //         properties: {
+  //           id: {
+  //             type: 'string'
+  //           }
+  //         },
+  //         required: ['id']
+  //       },
+  //       tags: ['place']
+  //     }
+  //   },
+  //   async (req, rep) => {
+  //     const { id: placeId } = req.params;
 
-      rep.code(200).send(await deletePlace(fastify, placeId));
-    }
-  );
+  //     rep.code(200).send(await deletePlace(fastify, placeId));
+  //   }
+  // );
 };

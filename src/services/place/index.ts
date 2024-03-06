@@ -60,20 +60,20 @@ export const getPlaceByIdWithAddress = async (fastify: FastifyInstance, placeId:
 //   });
 // };
 
-export const deletePlace = async (fastify: FastifyInstance, placeId: string): Promise<Place> => {
-  await fastify.prisma.placeToCategory.deleteMany({
-    where: {
-      placeId: placeId
-    }
-  });
-  await fastify.prisma.address.delete({
-    where: {
-      placeId: placeId
-    }
-  });
-  return await fastify.prisma.place.delete({
-    where: {
-      id: placeId
-    }
-  });
-};
+// export const deletePlace = async (fastify: FastifyInstance, placeId: string): Promise<Place> => {
+//   await fastify.prisma.placeToCategory.deleteMany({
+//     where: {
+//       placeId: placeId
+//     }
+//   });
+//   await fastify.prisma.address.delete({
+//     where: {
+//       placeId: placeId
+//     }
+//   });
+//   return await fastify.prisma.place.delete({
+//     where: {
+//       id: placeId
+//     }
+//   });
+// };

@@ -1,10 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import {
-  getCategorieById,
-  createCategorie,
-  updateCategorie,
-  deleteCategorie
-} from '../../services/category';
+import { getCategorieById, createCategorie, updateCategorie, deleteCategorie } from '../../services/category';
 
 export default async (fastify: FastifyInstance) => {
   fastify.get<{
