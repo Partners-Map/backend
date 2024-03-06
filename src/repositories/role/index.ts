@@ -1,45 +1,37 @@
-import type { Role } from '@prisma/client';
+import type { Role as TRole } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 
-export const getAllRoles = async (fastify: FastifyInstance): Promise<Role[]> => {
-  return await fastify.prisma.role.findMany();
-};
+const getAll = async (fastify: FastifyInstance): Promise<TRole[]> => await fastify.prisma.role.findMany();
 
-export const getRoleById = async (fastify: FastifyInstance, roleId: string): Promise<Role> => {
-  return await fastify.prisma.role.findUnique({
+const getById = async (fastify: FastifyInstance, roleId: string): Promise<TRole> =>
+  await fastify.prisma.role.findUnique({
     where: {
       id: roleId
     }
   });
-};
 
-export const createRole = async (fastify: FastifyInstance, title: string): Promise<Role> => {
-  return await fastify.prisma.role.create({
-    data: {
-      title
-    }
+const create = async (fastify: FastifyInstance, createdData: Omit<TRole, 'id'>): Promise<TRole> =>
+  await fastify.prisma.role.create({
+    data: createdData
   });
-};
 
-export const updateRole = async (
+const update = async (
   fastify: FastifyInstance,
   roleId: string,
-  newTitle: string
-): Promise<Role> => {
-  return await fastify.prisma.role.update({
+  updatebleData: Omit<TRole, 'id'>
+): Promise<TRole> =>
+  await fastify.prisma.role.update({
     where: {
       id: roleId
     },
-    data: {
-      title: newTitle
-    }
+    data: updatebleData
   });
-};
 
-export const deleteRole = async (fastify: FastifyInstance, roleId: string): Promise<Role> => {
-  return await fastify.prisma.role.delete({
+const remove = async (fastify: FastifyInstance, roleId: string): Promise<TRole> =>
+  await fastify.prisma.role.delete({
     where: {
       id: roleId
     }
   });
-};
+
+export default { getAll, getById, create, update, remove };
