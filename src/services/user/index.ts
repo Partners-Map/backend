@@ -1,33 +1,29 @@
-import type { User } from '@prisma/client';
+import type { User as TUser } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
-import { TCreateUserReq } from '../../@types/req/user';
-import { create, deleteById, findAll, findById, updateById } from '../../repositories/user';
+import UserRepository from '../../repositories/user';
 
-export const getAllUsers = async (fastify: FastifyInstance): Promise<User[]> => {
-  const allUsers = await findAll(fastify);
-  return allUsers;
+const getAll = async (fastify: FastifyInstance): Promise<TUser[]> => {
+  return await UserRepository.getAll(fastify);
 };
 
-export const getUserById = async (fastify: FastifyInstance, userId: string): Promise<User> => {
-  const foundUser = await findById(fastify, userId);
-  return foundUser;
+const getById = async (fastify: FastifyInstance, userId: string): Promise<TUser> => {
+  return await UserRepository.getById(fastify, userId);
 };
 
-export const createUser = async (fastify: FastifyInstance, createdData: TCreateUserReq): Promise<User> => {
-  const newUser = await create(fastify, createdData);
-  return newUser;
+const create = async (fastify: FastifyInstance, createdData: Omit<TUser, 'id'>): Promise<TUser> => {
+  return await UserRepository.create(fastify, createdData);
 };
 
-export const updateUser = async (
+const update = async (
   fastify: FastifyInstance,
   userId: string,
-  updatedData: TCreateUserReq
-): Promise<User> => {
-  const updatedUser = await updateById(fastify, userId, updatedData);
-  return updatedUser;
+  updatedData: Omit<TUser, 'id'>
+): Promise<TUser> => {
+  return await UserRepository.update(fastify, userId, updatedData);
 };
 
-export const deleteUserById = async (fastify: FastifyInstance, userId: string): Promise<User> => {
-  const deletedUser = await deleteById(fastify, userId);
-  return deletedUser;
+const remove = async (fastify: FastifyInstance, userId: string): Promise<TUser> => {
+  return await UserRepository.remove(fastify, userId);
 };
+
+export default { getAll, getById, create, update, remove };

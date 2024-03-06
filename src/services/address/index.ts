@@ -26,10 +26,4 @@ const remove = async (fastify: FastifyInstance, removableId: string): Promise<TA
   return await AddressRepository.remove(fastify, removableId);
 };
 
-export default {
-  getAll,
-  getById,
-  create,
-  update,
-  remove
-};
+export default { getAll, getById, create, update, remove };
