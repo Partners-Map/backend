@@ -27,12 +27,11 @@ const update = async (
     data: updatebleData
   });
 
-const remove = async (fastify: FastifyInstance, removableId: string): Promise<TPartner> => {
-  return await fastify.prisma.partner.delete({
+const remove = async (fastify: FastifyInstance, removableId: string): Promise<TPartner> =>
+  await fastify.prisma.partner.delete({
     where: {
       id: removableId
     }
   });
-};
 
 export default { getAll, getById, create, update, remove };
