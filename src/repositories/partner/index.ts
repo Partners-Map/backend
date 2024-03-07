@@ -28,21 +28,6 @@ const update = async (
   });
 
 const remove = async (fastify: FastifyInstance, removableId: string): Promise<TPartner> => {
-  await fastify.prisma.placeToCategory.deleteMany({
-    where: {
-      placeId: placeId
-    }
-  });
-  await fastify.prisma.address.delete({
-    where: {
-      placeId: placeId
-    }
-  });
-  await fastify.prisma.place.deleteMany({
-    where: {
-      partnerId: removableId
-    }
-  });
   return await fastify.prisma.partner.delete({
     where: {
       id: removableId

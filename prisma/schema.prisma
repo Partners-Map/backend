@@ -36,7 +36,7 @@ model Place {
   description     String?           @default("")
   avgReceipt      Int               @default(1)
   kitchen         String?           @default("")
-  partner         Partner           @relation(fields: [partnerId], references: [id])
+  partner         Partner           @relation(fields: [partnerId], references: [id], onDelete: Cascade)
   partnerId       String
   address         Address[]
   placeToCategory PlaceToCategory[]
@@ -71,7 +71,7 @@ model Address {
   house     String
   latitude  Decimal
   longitude Decimal
-  place     Place   @relation(fields: [placeId], references: [id])
+  place     Place   @relation(fields: [placeId], references: [id], onDelete: Cascade)
   placeId   String
 }
 
@@ -82,9 +82,9 @@ model Category {
 }
 
 model PlaceToCategory {
-  place      Place    @relation(fields: [placeId], references: [id])
+  place      Place    @relation(fields: [placeId], references: [id], onDelete: Cascade)
   placeId    String
-  category   Category @relation(fields: [categoryId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId String
   assignedAt DateTime @default(now())
 
