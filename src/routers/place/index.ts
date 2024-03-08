@@ -6,7 +6,7 @@ import {
   getPlaceById,
   getPlaceByIdWithAdress,
   updatePlace
-} from '../../controllers/place';
+} from '../../services/place';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get<{

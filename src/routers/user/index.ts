@@ -1,17 +1,18 @@
 import { FastifyInstance } from 'fastify/types/instance';
 import { TCreateUserReq } from '../../@types/req/user';
 import {
-  createUser,
-  deleteUserById,
-  getUserById,
-  updateUser
-} from '../../controllers/user';
-import {
   createUserRequestSchema,
   deleteUserByIdRequestSchema,
   getUserByIdRequestShema,
   updateUserRequestSchema
 } from '../../schemas/requests/user';
+import {
+  createUserResponseShema,
+  deleteUserResponseShema,
+  getUserByIdResponseShema,
+  updateUserResponseShema
+} from '../../schemas/responses/user';
+import { createUser, deleteUserById, getUserById, updateUser } from '../../services/user';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get<{
@@ -21,7 +22,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   }>(
     '/:id',
     {
-      schema: { ...getUserByIdRequestShema }
+      schema: { ...getUserByIdRequestShema, ...getUserByIdResponseShema }
     },
     async (req, rep) => {
       const { id: userId } = req.params;
@@ -31,7 +32,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.post<{ Body: TCreateUserReq }>(
     '/',
     {
-      schema: { ...createUserRequestSchema }
+      schema: { ...createUserRequestSchema, ...createUserResponseShema }
     },
     async (req, res) => {
       const user = req.body;
@@ -46,7 +47,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   }>(
     '/:id',
     {
-      schema: { ...updateUserRequestSchema }
+      schema: { ...updateUserRequestSchema, ...updateUserResponseShema }
     },
     async (req, res) => {
       const { id: userId } = req.params;
@@ -61,7 +62,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   }>(
     '/:id',
     {
-      schema: { ...deleteUserByIdRequestSchema }
+      schema: { ...deleteUserByIdRequestSchema, ...deleteUserResponseShema }
     },
     async (req, res) => {
       const { id: userId } = req.params;

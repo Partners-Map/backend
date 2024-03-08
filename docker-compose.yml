@@ -8,30 +8,30 @@ services:
       POSTGRES_HOST: ${DB_HOST}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - ${DB_PORT}:5432
     restart: always
     volumes:
       - partners_volume:/var/lib/postgresql/data
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
     networks:
       - partners-net
 
   partners-server:
     env_file: .env
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     environment:
-      DB_HOST: host.docker.internal
+      DB_HOST: ${DB_HOST}
+      DATABASE_URL: postgresql://myuser:mypassword@partners-db:5432/prisma?schema=public
     depends_on:
       - partners-db
     networks:
       - partners-net
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
 
 networks:
   partners-net:

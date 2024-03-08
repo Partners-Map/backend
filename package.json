@@ -7,7 +7,7 @@
     "dev:manual": "PROJECT_STATUS=development ts-node .",
     "dev": "PROJECT_STATUS=development nodemon",
     "build": "PROJECT_STATUS=production tsc -p tsconfig.json",
-    "prod": "node dist/src/index",
+    "prod": "PROJECT_STATUS=production node dist/src/index",
     "test": "PROJECT_STATUS=test jest",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc",

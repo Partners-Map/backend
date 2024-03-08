@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify/types/instance';
-import { getAllPlaces } from '../../controllers/place';
+import { getAllPlaces } from '../../services/place';
 
 export default async (fastify: FastifyInstance) => {
   fastify.get(
