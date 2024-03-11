@@ -1,75 +1,37 @@
-import { Place } from '@prisma/client';
+import { Place as TPlace } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 
-export const getAllPlaces = async (fastify: FastifyInstance): Promise<Place[]> => {
-  return await fastify.prisma.place.findMany();
-};
+const getAll = async (fastify: FastifyInstance): Promise<TPlace[]> => fastify.prisma.place.findMany();
 
-export const getPlaceById = async (fastify: FastifyInstance, placeId: string): Promise<Place> => {
-  return await fastify.prisma.place.findUnique({
+const getById = async (fastify: FastifyInstance, placeId: string): Promise<TPlace> =>
+  await fastify.prisma.place.findUnique({
     where: {
       id: placeId
     }
   });
-};
 
-export const getPlaceByIdWithAdress = async (fastify: FastifyInstance, placeId: string): Promise<any> => {
-  return await fastify.prisma.place.findUnique({
-    where: {
-      id: placeId
-    },
-    include: {
-      Address: true
-    }
+const create = async (fastify: FastifyInstance, createdData: Omit<TPlace, 'id'>): Promise<TPlace> =>
+  await fastify.prisma.place.create({
+    data: createdData
   });
-};
 
-export const createPlace = async (
+const update = async (
   fastify: FastifyInstance,
-  createdData: Omit<Place, 'id'>
-): Promise<Place> => {
-  return await fastify.prisma.place.create({
-    data: {
-      name: createdData.name,
-      description: createdData.description,
-      conditions: createdData.conditions,
-      partnerId: createdData.partnerId
-    }
-  });
-};
-
-export const updatePlace = async (
-  fastify: FastifyInstance,
-  placeId: string,
-  updatedData: Omit<Place, 'id'>
-): Promise<Place> => {
-  return await fastify.prisma.place.update({
+  updatebleId: string,
+  updatebleData: Omit<TPlace, 'id'>
+): Promise<TPlace> =>
+  await fastify.prisma.place.update({
     where: {
-      id: placeId
+      id: updatebleId
     },
-    data: {
-      name: updatedData.name,
-      description: updatedData.description,
-      conditions: updatedData.conditions,
-      partnerId: updatedData.partnerId
-    }
+    data: updatebleData
   });
-};
 
-export const deletePlace = async (fastify: FastifyInstance, placeId: string): Promise<Place> => {
-  await fastify.prisma.placeToCategory.deleteMany({
+const remove = async (fastify: FastifyInstance, removableId: string): Promise<TPlace> =>
+  await fastify.prisma.place.delete({
     where: {
-      placeId: placeId
+      id: removableId
     }
   });
-  await fastify.prisma.address.delete({
-    where: {
-      placeId: placeId
-    }
-  });
-  return await fastify.prisma.place.delete({
-    where: {
-      id: placeId
-    }
-  });
-};
+
+export default { getAll, getById, create, update, remove };

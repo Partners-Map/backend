@@ -1,12 +1,8 @@
+import { Category as TCategory } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
-import {
-  getCategorieById,
-  createCategorie,
-  updateCategorie,
-  deleteCategorie
-} from '../../services/category';
+import CategoryService from '../../services/category';
 
-export default async (fastify: FastifyInstance) => {
+export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get<{
     Params: {
       id: string;
@@ -28,14 +24,11 @@ export default async (fastify: FastifyInstance) => {
       }
     },
     async (req, rep) => {
-      const { id: categoryId } = req.params;
-      rep.code(200).send(await getCategorieById(fastify, categoryId));
+      rep.code(200).send(await CategoryService.getById(fastify, req.params.id));
     }
   );
   fastify.post<{
-    Body: {
-      title: string;
-    };
+    Body: Omit<TCategory, 'id'>;
   }>(
     '/',
     {
@@ -53,17 +46,14 @@ export default async (fastify: FastifyInstance) => {
       }
     },
     async (req, rep) => {
-      const { title } = req.body;
-      rep.code(200).send(await createCategorie(fastify, title));
+      rep.code(200).send(await CategoryService.create(fastify, req.body));
     }
   );
   fastify.put<{
     Params: {
       id: string;
     };
-    Body: {
-      title: string;
-    };
+    Body: Omit<TCategory, 'id'>;
   }>(
     '/:id',
     {
@@ -90,9 +80,7 @@ export default async (fastify: FastifyInstance) => {
       }
     },
     async (req, rep) => {
-      const { id: categoryId } = req.params;
-      const { title } = req.body;
-      rep.code(200).send(await updateCategorie(fastify, categoryId, title));
+      rep.code(200).send(await CategoryService.update(fastify, req.params.id, req.body));
     }
   );
   fastify.delete<{
@@ -116,8 +104,7 @@ export default async (fastify: FastifyInstance) => {
       }
     },
     async (req, rep) => {
-      const { id: categoryId } = req.params;
-      rep.code(200).send(await deleteCategorie(fastify, categoryId));
+      rep.code(200).send(await CategoryService.remove(fastify, req.params.id));
     }
   );
 };

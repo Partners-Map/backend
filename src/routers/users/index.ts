@@ -1,8 +1,8 @@
 import { FastifyInstance } from 'fastify/types/instance';
-import { getAllUsers } from '../../services/user';
 import { getAllUsersResponseShema } from '../../schemas/responses/user';
+import UserService from '../../services/user';
 
-export default async (fastify: FastifyInstance) => {
+export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get(
     '/',
     {
@@ -12,7 +12,7 @@ export default async (fastify: FastifyInstance) => {
       }
     },
     async (req, rep) => {
-      rep.code(200).send(await getAllUsers(fastify));
+      rep.code(200).send(await UserService.getAll(fastify));
     }
   );
 };

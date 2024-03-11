@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import { createRole, deleteRole, getRoleById, updateRole } from '../../services/role';
+import { roleBodyRequestShema, roleParamsIdRequestShema } from '../../schemas/requests/role';
+import RoleService from '../../services/role';
 
 export default async (fastify: FastifyInstance) => {
   fastify.get<{
@@ -10,21 +11,11 @@ export default async (fastify: FastifyInstance) => {
     '/:id',
     {
       schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        tags: ['role']
+        ...roleParamsIdRequestShema
       }
     },
     async (req, rep) => {
-      const { id: roleId } = req.params;
-      rep.code(200).send(await getRoleById(fastify, roleId));
+      rep.code(200).send(await RoleService.getById(fastify, req.params.id));
     }
   );
   fastify.post<{
@@ -35,21 +26,11 @@ export default async (fastify: FastifyInstance) => {
     '/',
     {
       schema: {
-        body: {
-          type: 'object',
-          properties: {
-            title: {
-              type: 'string'
-            }
-          },
-          required: ['title']
-        },
-        tags: ['role']
+        ...roleBodyRequestShema
       }
     },
     async (req, rep) => {
-      const { title } = req.body;
-      rep.code(200).send(await createRole(fastify, title));
+      rep.code(200).send(await RoleService.create(fastify, req.body));
     }
   );
   fastify.put<{
@@ -63,31 +44,12 @@ export default async (fastify: FastifyInstance) => {
     '/:id',
     {
       schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        body: {
-          type: 'object',
-          properties: {
-            title: {
-              type: 'string'
-            }
-          },
-          required: ['title']
-        },
-        tags: ['role']
+        ...roleParamsIdRequestShema,
+        ...roleBodyRequestShema
       }
     },
     async (req, rep) => {
-      const { id: roleId } = req.params;
-      const { title } = req.body;
-      rep.code(200).send(await updateRole(fastify, roleId, title));
+      rep.code(200).send(await RoleService.update(fastify, req.params.id, req.body));
     }
   );
   fastify.delete<{
@@ -98,21 +60,11 @@ export default async (fastify: FastifyInstance) => {
     '/:id',
     {
       schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        tags: ['role']
+        ...roleParamsIdRequestShema
       }
     },
     async (req, rep) => {
-      const { id: roleId } = req.params;
-      rep.code(200).send(await deleteRole(fastify, roleId));
+      rep.code(200).send(await RoleService.remove(fastify, req.params.id));
     }
   );
 };

@@ -8,7 +8,9 @@ const initDatabaseConnection = async (): Promise<PrismaClient> => {
       db: {
         url: databaseConfig.databaseURL
       }
-    }
+    },
+    errorFormat: 'pretty',
+    log: ['query', 'info', 'warn', 'error']
   });
   await db.$connect();
   return db;

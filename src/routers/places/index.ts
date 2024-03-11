@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify/types/instance';
-import { getAllPlaces } from '../../services/place';
+import PartnersService from '../../services/place';
 
-export default async (fastify: FastifyInstance) => {
+export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get(
     '/',
     {
@@ -10,7 +10,7 @@ export default async (fastify: FastifyInstance) => {
       }
     },
     async (req, rep) => {
-      rep.code(200).send(await getAllPlaces(fastify));
+      rep.code(200).send(await PartnersService.getAll(fastify));
     }
   );
 };

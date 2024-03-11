@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify/types/instance';
-import { getAllRoles } from '../../services/role';
+import RoleService from '../../services/role';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get(
@@ -10,7 +10,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       }
     },
     async (req, rep) => {
-      rep.code(200).send(await getAllRoles(fastify));
+      rep.code(200).send(await RoleService.getAll(fastify));
     }
   );
 };

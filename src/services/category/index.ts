@@ -1,50 +1,29 @@
-import { Category } from '@prisma/client';
+import { Category as TCategory } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
+import CategoryRepository from '../../repositories/category';
 
-export const getAllCategories = async (fastify: FastifyInstance): Promise<Category[]> => {
-  return await fastify.prisma.category.findMany();
+const getAll = async (fastify: FastifyInstance): Promise<TCategory[]> => {
+  return await CategoryRepository.getAll(fastify);
 };
 
-export const getCategorieById = async (fastify: FastifyInstance, categoryId: string): Promise<Category> => {
-  return await fastify.prisma.category.findUnique({
-    where: {
-      id: categoryId
-    }
-  });
+const getById = async (fastify: FastifyInstance, categoryId: string): Promise<TCategory> => {
+  return await CategoryRepository.getById(fastify, categoryId);
 };
 
-export const createCategorie = async (fastify: FastifyInstance, title: string): Promise<Category> => {
-  return await fastify.prisma.category.create({
-    data: {
-      title
-    }
-  });
+const create = async (fastify: FastifyInstance, createdData: Omit<TCategory, 'id'>): Promise<TCategory> => {
+  return await CategoryRepository.create(fastify, createdData);
 };
 
-export const updateCategorie = async (
+const update = async (
   fastify: FastifyInstance,
-  categoryId: string,
-  newTitle: string
-): Promise<Category> => {
-  return await fastify.prisma.category.update({
-    where: {
-      id: categoryId
-    },
-    data: {
-      title: newTitle
-    }
-  });
+  updatebleId: string,
+  updatebleData: Omit<TCategory, 'id'>
+): Promise<TCategory> => {
+  return await CategoryRepository.update(fastify, updatebleId, updatebleData);
 };
 
-export const deleteCategorie = async (fastify: FastifyInstance, categoryId: string): Promise<Category> => {
-  await fastify.prisma.placeToCategory.deleteMany({
-    where: {
-      categoryId: categoryId
-    }
-  });
-  return await fastify.prisma.category.delete({
-    where: {
-      id: categoryId
-    }
-  });
+const remove = async (fastify: FastifyInstance, removableId: string): Promise<TCategory> => {
+  return await CategoryRepository.remove(fastify, removableId);
 };
+
+export default { getAll, getById, create, update, remove };

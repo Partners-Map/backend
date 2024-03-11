@@ -1,12 +1,7 @@
 import { Place } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
-import {
-  createPlace,
-  deletePlace,
-  getPlaceById,
-  getPlaceByIdWithAdress,
-  updatePlace
-} from '../../services/place';
+import PartnersService from '../../services/place';
+import { placeParamsIdRequestShema, placeBodyRequestShema } from '../../schemas/requests/place';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get<{
@@ -17,76 +12,22 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     '/:id',
     {
       schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        tags: ['place']
+        ...placeParamsIdRequestShema
       }
     },
     async (req, res) => {
-      const { id: placeId } = req.params;
-      res.code(200).send(await getPlaceById(fastify, placeId));
-    }
-  );
-  fastify.get<{
-    Params: {
-      id: string;
-    };
-  }>(
-    '/withAddress/:id',
-    {
-      schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        tags: ['place']
-      }
-    },
-    async (req, res) => {
-      const { id: placeId } = req.params;
-      res.code(200).send(await getPlaceByIdWithAdress(fastify, placeId));
+      res.code(200).send(await PartnersService.getById(fastify, req.params.id));
     }
   );
   fastify.post<{ Body: Omit<Place, 'id'> }>(
     '/',
     {
       schema: {
-        body: {
-          type: 'object',
-          properties: {
-            name: {
-              type: 'string'
-            },
-            description: {
-              type: 'string'
-            },
-            conditions: {
-              type: 'string'
-            },
-            partnerId: {
-              type: 'string'
-            }
-          },
-          required: ['name', 'description', 'conditions', 'partnerId']
-        },
-        tags: ['place']
+        ...placeBodyRequestShema
       }
     },
     async (req, res) => {
-      const createdData = req.body;
-      res.code(200).send(await createPlace(fastify, createdData));
+      res.code(200).send(await PartnersService.create(fastify, req.body));
     }
   );
   fastify.put<{
@@ -98,40 +39,12 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     '/:id',
     {
       schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        body: {
-          type: 'object',
-          properties: {
-            name: {
-              type: 'string'
-            },
-            description: {
-              type: 'string'
-            },
-            conditions: {
-              type: 'string'
-            },
-            partnerId: {
-              type: 'string'
-            }
-          },
-          required: ['name', 'description', 'conditions', 'partnerId']
-        },
-        tags: ['place']
+        ...placeParamsIdRequestShema,
+        ...placeBodyRequestShema
       }
     },
     async (req, res) => {
-      const { id: placeId } = req.params;
-      const updatedData = req.body;
-      res.code(200).send(await updatePlace(fastify, placeId, updatedData));
+      res.code(200).send(await PartnersService.update(fastify, req.params.id, req.body));
     }
   );
   fastify.delete<{
@@ -142,22 +55,11 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     '/:id',
     {
       schema: {
-        params: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string'
-            }
-          },
-          required: ['id']
-        },
-        tags: ['place']
+        ...placeParamsIdRequestShema
       }
     },
     async (req, rep) => {
-      const { id: placeId } = req.params;
-
-      rep.code(200).send(await deletePlace(fastify, placeId));
+      rep.code(200).send(await PartnersService.remove(fastify, req.params.id));
     }
   );
 };

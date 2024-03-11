@@ -21,47 +21,70 @@ model User {
 model Role {
   id    String @id @default(uuid())
   title String @unique
-  User  User[]
+  user  User[]
 }
 
 model Partner {
   id    String  @id @default(uuid())
-  name  String
-  Place Place[]
+  name  String  @unique
+  place Place[]
 }
 
 model Place {
   id              String            @id @default(uuid())
-  name            String
-  description     String?
-  conditions      String[]
-  partner         Partner           @relation(fields: [partnerId], references: [id])
+  title           String
+  description     String?           @default("")
+  avgReceipt      Int               @default(1)
+  kitchen         String?           @default("")
+  partner         Partner           @relation(fields: [partnerId], references: [id], onDelete: Cascade)
   partnerId       String
-  Address         Address?
-  PlaceToCategory PlaceToCategory[]
+  address         Address[]
+  placeToCategory PlaceToCategory[]
+  discount        Discount          @relation(fields: [discountId], references: [id])
+  discountId      String
+
+  @@unique([title, description, kitchen])
+}
+
+model Discount {
+  id             String       @id @default(uuid())
+  conditions     String[]
+  amount         Int          @default(0)
+  information    String?      @default("")
+  discountType   DiscountType @relation(fields: [discountTypeId], references: [id])
+  discountTypeId String
+  place          Place[]
+
+  @@unique([conditions, amount, information, discountTypeId])
+}
+
+model DiscountType {
+  id       String     @id @default(uuid())
+  title    String     @unique
+  discount Discount[]
 }
 
 model Address {
   id        String  @id @default(uuid())
   city      String
   street    String
-  house     String?
+  house     String
   latitude  Decimal
   longitude Decimal
-  place     Place   @relation(fields: [placeId], references: [id])
-  placeId   String  @unique
+  place     Place   @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  placeId   String
 }
 
 model Category {
   id              String            @id @default(uuid())
   title           String            @unique
-  PlaceToCategory PlaceToCategory[]
+  placeToCategory PlaceToCategory[]
 }
 
 model PlaceToCategory {
-  place      Place    @relation(fields: [placeId], references: [id])
+  place      Place    @relation(fields: [placeId], references: [id], onDelete: Cascade)
   placeId    String
-  category   Category @relation(fields: [categoryId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId String
   assignedAt DateTime @default(now())
 

@@ -1,5 +1,5 @@
+import type { User as TUser } from '@prisma/client';
 import { FastifyInstance } from 'fastify/types/instance';
-import { TCreateUserReq } from '../../@types/req/user';
 import {
   createUserRequestSchema,
   deleteUserByIdRequestSchema,
@@ -12,7 +12,7 @@ import {
   getUserByIdResponseShema,
   updateUserResponseShema
 } from '../../schemas/responses/user';
-import { createUser, deleteUserById, getUserById, updateUser } from '../../services/user';
+import UserService from '../../services/user';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get<{
@@ -25,34 +25,30 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: { ...getUserByIdRequestShema, ...getUserByIdResponseShema }
     },
     async (req, rep) => {
-      const { id: userId } = req.params;
-      rep.code(200).send(await getUserById(fastify, userId));
+      rep.code(200).send(await UserService.getById(fastify, req.params.id));
     }
   );
-  fastify.post<{ Body: TCreateUserReq }>(
+  fastify.post<{ Body: Omit<TUser, 'id'> }>(
     '/',
     {
       schema: { ...createUserRequestSchema, ...createUserResponseShema }
     },
     async (req, res) => {
-      const user = req.body;
-      res.code(201).send(await createUser(fastify, user));
+      res.code(201).send(await UserService.create(fastify, req.body));
     }
   );
   fastify.put<{
     Params: {
       id: string;
     };
-    Body: TCreateUserReq;
+    Body: Omit<TUser, 'id'>;
   }>(
     '/:id',
     {
       schema: { ...updateUserRequestSchema, ...updateUserResponseShema }
     },
     async (req, res) => {
-      const { id: userId } = req.params;
-      const userData = req.body;
-      res.code(200).send(await updateUser(fastify, userId, userData));
+      res.code(200).send(await UserService.update(fastify, req.params.id, req.body));
     }
   );
   fastify.delete<{
@@ -65,8 +61,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: { ...deleteUserByIdRequestSchema, ...deleteUserResponseShema }
     },
     async (req, res) => {
-      const { id: userId } = req.params;
-      res.code(200).send(await deleteUserById(fastify, userId));
+      res.code(200).send(await UserService.remove(fastify, req.params.id));
     }
   );
 };
