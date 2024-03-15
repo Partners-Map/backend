@@ -8,7 +8,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       password: '';
     };
   }>(
-    '/',
+    '/login',
     {
       schema: {
         body: {
