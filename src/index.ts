@@ -13,6 +13,7 @@ fastify.register(autoLoad, {
   dir: join(__dirname, 'plugins')
 });
 
+// TODO: проверка на access token
 fastify.register(autoLoad, {
   dir: join(__dirname, 'routers'),
   options: {
