@@ -29,7 +29,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       const lognResult = await AuthService.login(req.body, fastify);
 
       if (!lognResult.status) {
-        res.code(401).send({ error: lognResult.message });
+        res.code(401).send({ error: 'неверные email или password' });
         return;
       }
 

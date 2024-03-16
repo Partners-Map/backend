@@ -1,34 +1,26 @@
 import { User as TUser } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
+import UserRepository from '../../repositories/user';
+import bcrypt from 'bcrypt';
 
 type TLoginData = {
   email: string;
   password: string;
 };
 
-const login = async ({ email, password }: TLoginData, fastify: FastifyInstance) => {
-  const checkResult = await checkLoginDetails({ email, password }, fastify);
-  if (!checkResult.message && checkResult.isPasswordValid) {
-    return { status: checkResult.isPasswordValid, user: checkResult.user };
-  } else if (checkResult.message) {
-    return { status: false, message: checkResult.message };
-  } else {
-    return { status: false, message: 'Неверный пароль' };
-  }
+type TLoginResponse = {
+  status: boolean;
+  user?: TUser;
 };
 
-const checkLoginDetails = async (data: TLoginData, fastify: FastifyInstance) => {
+const login = async ({ email, password }: TLoginData, fastify: FastifyInstance): Promise<TLoginResponse> => {
   try {
-    const user = await fastify.prisma.user.findUnique({
-      where: {
-        email: data.email
-      }
-    });
-    const isPasswordValid = user.password === data.password;
-    return { email: true, isPasswordValid, user };
+    const user = await UserRepository.getByEmail(fastify, email);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    return { status: isPasswordValid, user };
   } catch (error) {
     fastify.log.error(error);
-    return { email: false, message: 'Пользователя с таким email не найдено' };
+    return { status: false };
   }
 };
 
