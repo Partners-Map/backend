@@ -6,8 +6,8 @@ export const usersSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOptions
   await prisma.user.createMany({
     data: [
       {
-        email: 'admin@example.com',
-        password: 'qwerty123',
+        email: process.env.BASE_ADMIN_EMAIL!,
+        password: process.env.BASE_ADMIN_PASSWORD!,
         roleId: adminRole.id
       },
       {

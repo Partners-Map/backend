@@ -22,7 +22,11 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   }>(
     '/:id',
     {
-      schema: { ...getUserByIdRequestShema, ...getUserByIdResponseShema }
+      schema: {
+        ...getUserByIdRequestShema,
+        ...getUserByIdResponseShema
+      },
+      onRequest: [fastify.authenticate]
     },
     async (req, rep) => {
       rep.code(200).send(await UserService.getById(fastify, req.params.id));
@@ -45,7 +49,11 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   }>(
     '/:id',
     {
-      schema: { ...updateUserRequestSchema, ...updateUserResponseShema }
+      schema: {
+        ...updateUserRequestSchema,
+        ...updateUserResponseShema
+      },
+      onRequest: [fastify.authenticate]
     },
     async (req, res) => {
       res.code(200).send(await UserService.update(fastify, req.params.id, req.body));
@@ -58,7 +66,11 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   }>(
     '/:id',
     {
-      schema: { ...deleteUserByIdRequestSchema, ...deleteUserResponseShema }
+      schema: {
+        ...deleteUserByIdRequestSchema,
+        ...deleteUserResponseShema
+      },
+      onRequest: [fastify.authenticate]
     },
     async (req, res) => {
       res.code(200).send(await UserService.remove(fastify, req.params.id));
