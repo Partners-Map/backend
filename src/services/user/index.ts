@@ -12,10 +12,10 @@ const getById = async (fastify: FastifyInstance, userId: string): Promise<TUser>
   return await UserRepository.getById(fastify, userId);
 };
 
-const create = async (fastify: FastifyInstance, createdData: Omit<TUser, 'id'>): Promise<TUser> => {
+const create = async (fastify: FastifyInstance, data: Omit<TUser, 'id'>): Promise<TUser> => {
   return await UserRepository.create(fastify, {
-    ...createdData,
-    password: await bcrypt.hash(createdData.password, Number(process.env.USER_PASSWORD_SALT_ROUNDS!))
+    ...data,
+    password: await bcrypt.hash(data.password, Number(process.env.USER_PASSWORD_SALT_ROUNDS!))
   });
 };
 

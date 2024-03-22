@@ -10,20 +10,16 @@ const getById = async (fastify: FastifyInstance, partnerId: string): Promise<TPl
   return await PlaceRepository.getById(fastify, partnerId);
 };
 
-const create = async (fastify: FastifyInstance, createdData: Omit<TPlace, 'id'>): Promise<TPlace> => {
-  return await PlaceRepository.create(fastify, createdData);
+const create = async (fastify: FastifyInstance, data: Omit<TPlace, 'id'>): Promise<TPlace> => {
+  return await PlaceRepository.create(fastify, data);
 };
 
-const update = async (
-  fastify: FastifyInstance,
-  updatebleId: string,
-  updatebleData: Omit<TPlace, 'id'>
-): Promise<TPlace> => {
-  return await PlaceRepository.update(fastify, updatebleId, updatebleData);
+const update = async (fastify: FastifyInstance, id: string, data: Omit<TPlace, 'id'>): Promise<TPlace> => {
+  return await PlaceRepository.update(fastify, id, data);
 };
 
-const remove = async (fastify: FastifyInstance, removableId: string): Promise<TPlace> => {
-  return await PlaceRepository.remove(fastify, removableId);
+const remove = async (fastify: FastifyInstance, id: string): Promise<TPlace> => {
+  return await PlaceRepository.remove(fastify, id);
 };
 
 export default { getAll, getById, create, update, remove };

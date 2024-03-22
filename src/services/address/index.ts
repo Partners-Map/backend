@@ -10,20 +10,20 @@ const getById = async (fastify: FastifyInstance, addressId: string): Promise<TAd
   return await AddressRepository.getById(fastify, addressId);
 };
 
-const create = async (fastify: FastifyInstance, createdData: Omit<TAddress, 'id'>): Promise<TAddress> => {
-  return await AddressRepository.create(fastify, createdData);
+const create = async (fastify: FastifyInstance, data: Omit<TAddress, 'id'>): Promise<TAddress> => {
+  return await AddressRepository.create(fastify, data);
 };
 
 const update = async (
   fastify: FastifyInstance,
-  updatebleId: string,
-  updatebleData: Omit<TAddress, 'id'>
+  id: string,
+  data: Omit<TAddress, 'id'>
 ): Promise<TAddress> => {
-  return await AddressRepository.update(fastify, updatebleId, updatebleData);
+  return await AddressRepository.update(fastify, id, data);
 };
 
-const remove = async (fastify: FastifyInstance, removableId: string): Promise<TAddress> => {
-  return await AddressRepository.remove(fastify, removableId);
+const remove = async (fastify: FastifyInstance, id: string): Promise<TAddress> => {
+  return await AddressRepository.remove(fastify, id);
 };
 
 export default { getAll, getById, create, update, remove };

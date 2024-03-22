@@ -6,13 +6,13 @@ const getAll = async (fastify: FastifyInstance): Promise<TDiscount[]> => fastify
 const getById = async (fastify: FastifyInstance, id: string): Promise<TDiscount> =>
   await fastify.prisma.discount.findUnique({
     where: {
-      id: id
+      id
     }
   });
 
 const create = async (fastify: FastifyInstance, data: Omit<TDiscount, 'id'>): Promise<TDiscount> =>
   await fastify.prisma.discount.create({
-    data: data
+    data
   });
 
 const update = async (
@@ -22,15 +22,15 @@ const update = async (
 ): Promise<TDiscount> =>
   await fastify.prisma.discount.update({
     where: {
-      id: id
+      id
     },
-    data: data
+    data
   });
 
 const remove = async (fastify: FastifyInstance, id: string): Promise<TDiscount> =>
   await fastify.prisma.discount.delete({
     where: {
-      id: id
+      id
     }
   });
 
