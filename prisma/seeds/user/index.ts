@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import 'dotenv/config';
 
 export const usersSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>) => {
-  const [adminRole, partnerRole] = await prisma.role.findMany();
+  const [adminRole] = await prisma.role.findMany();
   await prisma.user.createMany({
     data: [
       {
@@ -14,21 +14,6 @@ export const usersSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOptions
           Number(process.env.USER_PASSWORD_SALT_ROUNDS!)
         ),
         roleId: adminRole.id
-      },
-      {
-        email: 'partner@example.com',
-        password: await bcrypt.hash('qwerty123', Number(process.env.USER_PASSWORD_SALT_ROUNDS!)),
-        roleId: partnerRole.id
-      },
-      {
-        email: 'user1@example.com',
-        password: await bcrypt.hash('qwerty123', Number(process.env.USER_PASSWORD_SALT_ROUNDS!)),
-        roleId: partnerRole.id
-      },
-      {
-        email: 'user2@example.com',
-        password: await bcrypt.hash('qwerty123', Number(process.env.USER_PASSWORD_SALT_ROUNDS!)),
-        roleId: partnerRole.id
       }
     ]
   });
