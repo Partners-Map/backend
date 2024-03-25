@@ -13,15 +13,20 @@ type TLoginResponse = {
   user?: TUser;
 };
 
-const login = async ({ email, password }: TLoginData, fastify: FastifyInstance): Promise<TLoginResponse> => {
-  try {
-    const user = await UserRepository.getByEmail(fastify, email);
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    return { status: isPasswordValid, user };
-  } catch (error) {
-    fastify.log.error(error);
-    return { status: false };
-  }
+const checkUser = async (
+  { email, password }: TLoginData,
+  fastify: FastifyInstance
+): Promise<TLoginResponse> => {
+  const user = await UserRepository.getByEmail(fastify, email);
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  return user && isPasswordValid
+    ? {
+        status: true,
+        user
+      }
+    : {
+        status: false
+      };
 };
 
 const generateAccessToken = async (user: TUser, fastify: FastifyInstance): Promise<string> => {
@@ -31,6 +36,6 @@ const generateAccessToken = async (user: TUser, fastify: FastifyInstance): Promi
 };
 
 export default {
-  login,
+  checkUser,
   generateAccessToken
 };
