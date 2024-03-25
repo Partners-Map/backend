@@ -18,8 +18,7 @@ const checkUser = async (
   fastify: FastifyInstance
 ): Promise<TLoginResponse> => {
   const user = await UserRepository.getByEmail(fastify, email);
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-  return user && isPasswordValid
+  return user && (await bcrypt.compare(password, user.password))
     ? {
         status: true,
         user
