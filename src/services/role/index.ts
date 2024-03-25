@@ -6,24 +6,20 @@ const getAll = async (fastify: FastifyInstance): Promise<TRole[]> => {
   return await RoleRepository.getAll(fastify);
 };
 
-const getById = async (fastify: FastifyInstance, addressId: string): Promise<TRole> => {
-  return await RoleRepository.getById(fastify, addressId);
+const getById = async (fastify: FastifyInstance, id: string): Promise<TRole> => {
+  return await RoleRepository.getById(fastify, id);
 };
 
-const create = async (fastify: FastifyInstance, createdData: Omit<TRole, 'id'>): Promise<TRole> => {
-  return await RoleRepository.create(fastify, createdData);
+const create = async (fastify: FastifyInstance, data: Omit<TRole, 'id'>): Promise<TRole> => {
+  return await RoleRepository.create(fastify, data);
 };
 
-const update = async (
-  fastify: FastifyInstance,
-  updatebleId: string,
-  updatebleData: Omit<TRole, 'id'>
-): Promise<TRole> => {
-  return await RoleRepository.update(fastify, updatebleId, updatebleData);
+const update = async (fastify: FastifyInstance, id: string, data: Omit<TRole, 'id'>): Promise<TRole> => {
+  return await RoleRepository.update(fastify, id, data);
 };
 
-const remove = async (fastify: FastifyInstance, removableId: string): Promise<TRole> => {
-  return await RoleRepository.remove(fastify, removableId);
+const remove = async (fastify: FastifyInstance, id: string): Promise<TRole> => {
+  return await RoleRepository.remove(fastify, id);
 };
 
 export default {

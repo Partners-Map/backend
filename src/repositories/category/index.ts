@@ -3,39 +3,39 @@ import { FastifyInstance } from 'fastify';
 
 const getAll = async (fastify: FastifyInstance): Promise<TCategory[]> => fastify.prisma.category.findMany();
 
-const getById = async (fastify: FastifyInstance, categoryId: string): Promise<TCategory> =>
+const getById = async (fastify: FastifyInstance, id: string): Promise<TCategory> =>
   await fastify.prisma.category.findUnique({
     where: {
-      id: categoryId
+      id
     }
   });
 
-const create = async (fastify: FastifyInstance, createdData: Omit<TCategory, 'id'>): Promise<TCategory> =>
+const create = async (fastify: FastifyInstance, data: Omit<TCategory, 'id'>): Promise<TCategory> =>
   await fastify.prisma.category.create({
-    data: createdData
+    data
   });
 
 const update = async (
   fastify: FastifyInstance,
-  updatebleId: string,
-  updatebleData: Omit<TCategory, 'id'>
+  id: string,
+  data: Omit<TCategory, 'id'>
 ): Promise<TCategory> =>
   await fastify.prisma.category.update({
     where: {
-      id: updatebleId
+      id
     },
-    data: updatebleData
+    data
   });
 
-const remove = async (fastify: FastifyInstance, removableId: string): Promise<TCategory> => {
+const remove = async (fastify: FastifyInstance, id: string): Promise<TCategory> => {
   await fastify.prisma.placeToCategory.deleteMany({
     where: {
-      categoryId: removableId
+      categoryId: id
     }
   });
   return await fastify.prisma.category.delete({
     where: {
-      id: removableId
+      id
     }
   });
 };

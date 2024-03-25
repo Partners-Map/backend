@@ -19,7 +19,7 @@ const getByEmail = async (fastify: FastifyInstance, email: string): Promise<TUse
 
 const create = async (fastify: FastifyInstance, data: Omit<TUser, 'id'>): Promise<TUser> =>
   await fastify.prisma.user.create({
-    data: data
+    data
   });
 
 const update = async (fastify: FastifyInstance, id: string, data: Omit<TUser, 'id'>): Promise<TUser> =>
@@ -27,7 +27,7 @@ const update = async (fastify: FastifyInstance, id: string, data: Omit<TUser, 'i
     where: {
       id
     },
-    data: data
+    data
   });
 
 const remove = async (fastify: FastifyInstance, id: string): Promise<TUser> =>

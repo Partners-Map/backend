@@ -3,34 +3,30 @@ import { FastifyInstance } from 'fastify';
 
 const getAll = async (fastify: FastifyInstance): Promise<TPartner[]> => fastify.prisma.partner.findMany();
 
-const getById = async (fastify: FastifyInstance, partnerId: string): Promise<TPartner> =>
+const getById = async (fastify: FastifyInstance, id: string): Promise<TPartner> =>
   await fastify.prisma.partner.findUnique({
     where: {
-      id: partnerId
+      id
     }
   });
 
-const create = async (fastify: FastifyInstance, createdData: Omit<TPartner, 'id'>): Promise<TPartner> =>
+const create = async (fastify: FastifyInstance, data: Omit<TPartner, 'id'>): Promise<TPartner> =>
   await fastify.prisma.partner.create({
-    data: createdData
+    data
   });
 
-const update = async (
-  fastify: FastifyInstance,
-  updatebleId: string,
-  updatebleData: Omit<TPartner, 'id'>
-): Promise<TPartner> =>
+const update = async (fastify: FastifyInstance, id: string, data: Omit<TPartner, 'id'>): Promise<TPartner> =>
   await fastify.prisma.partner.update({
     where: {
-      id: updatebleId
+      id
     },
-    data: updatebleData
+    data
   });
 
-const remove = async (fastify: FastifyInstance, removableId: string): Promise<TPartner> =>
+const remove = async (fastify: FastifyInstance, id: string): Promise<TPartner> =>
   await fastify.prisma.partner.delete({
     where: {
-      id: removableId
+      id
     }
   });
 
