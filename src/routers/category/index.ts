@@ -43,7 +43,8 @@ export default async (fastify: FastifyInstance): Promise<void> => {
           required: ['title']
         },
         tags: ['category']
-      }
+      },
+      onRequest: [fastify.authenticate]
     },
     async (req, rep) => {
       rep.code(200).send(await CategoryService.create(fastify, req.body));
@@ -77,7 +78,8 @@ export default async (fastify: FastifyInstance): Promise<void> => {
           required: ['title']
         },
         tags: ['category']
-      }
+      },
+      onRequest: [fastify.authenticate]
     },
     async (req, rep) => {
       rep.code(200).send(await CategoryService.update(fastify, req.params.id, req.body));
@@ -101,7 +103,8 @@ export default async (fastify: FastifyInstance): Promise<void> => {
           required: ['id']
         },
         tags: ['category']
-      }
+      },
+      onRequest: [fastify.authenticate]
     },
     async (req, rep) => {
       rep.code(200).send(await CategoryService.remove(fastify, req.params.id));

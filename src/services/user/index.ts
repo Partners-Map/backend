@@ -1,4 +1,6 @@
 import type { User as TUser } from '@prisma/client';
+import bcrypt from 'bcrypt';
+import 'dotenv/config';
 import { FastifyInstance } from 'fastify';
 import UserRepository from '../../repositories/user';
 
@@ -11,7 +13,10 @@ const getById = async (fastify: FastifyInstance, userId: string): Promise<TUser>
 };
 
 const create = async (fastify: FastifyInstance, createdData: Omit<TUser, 'id'>): Promise<TUser> => {
-  return await UserRepository.create(fastify, createdData);
+  return await UserRepository.create(fastify, {
+    ...createdData,
+    password: await bcrypt.hash(createdData.password, Number(process.env.USER_PASSWORD_SALT_ROUNDS!))
+  });
 };
 
 const update = async (
