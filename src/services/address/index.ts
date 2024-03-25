@@ -6,8 +6,8 @@ const getAll = async (fastify: FastifyInstance): Promise<TAddress[]> => {
   return await AddressRepository.getAll(fastify);
 };
 
-const getById = async (fastify: FastifyInstance, addressId: string): Promise<TAddress> => {
-  return await AddressRepository.getById(fastify, addressId);
+const getById = async (fastify: FastifyInstance, id: string): Promise<TAddress> => {
+  return await AddressRepository.getById(fastify, id);
 };
 
 const create = async (fastify: FastifyInstance, data: Omit<TAddress, 'id'>): Promise<TAddress> => {

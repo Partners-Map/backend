@@ -6,8 +6,8 @@ const getAll = async (fastify: FastifyInstance): Promise<TRole[]> => {
   return await RoleRepository.getAll(fastify);
 };
 
-const getById = async (fastify: FastifyInstance, addressId: string): Promise<TRole> => {
-  return await RoleRepository.getById(fastify, addressId);
+const getById = async (fastify: FastifyInstance, id: string): Promise<TRole> => {
+  return await RoleRepository.getById(fastify, id);
 };
 
 const create = async (fastify: FastifyInstance, data: Omit<TRole, 'id'>): Promise<TRole> => {

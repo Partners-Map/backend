@@ -8,8 +8,8 @@ const getAll = async (fastify: FastifyInstance): Promise<TUser[]> => {
   return await UserRepository.getAll(fastify);
 };
 
-const getById = async (fastify: FastifyInstance, userId: string): Promise<TUser> => {
-  return await UserRepository.getById(fastify, userId);
+const getById = async (fastify: FastifyInstance, id: string): Promise<TUser> => {
+  return await UserRepository.getById(fastify, id);
 };
 
 const create = async (fastify: FastifyInstance, data: Omit<TUser, 'id'>): Promise<TUser> => {
@@ -21,14 +21,20 @@ const create = async (fastify: FastifyInstance, data: Omit<TUser, 'id'>): Promis
 
 const update = async (
   fastify: FastifyInstance,
-  userId: string,
+  id: string,
   updatedData: Omit<TUser, 'id'>
 ): Promise<TUser> => {
-  return await UserRepository.update(fastify, userId, updatedData);
+  return await UserRepository.update(fastify, id, updatedData);
 };
 
-const remove = async (fastify: FastifyInstance, userId: string): Promise<TUser> => {
-  return await UserRepository.remove(fastify, userId);
+const remove = async (fastify: FastifyInstance, id: string): Promise<TUser> => {
+  return await UserRepository.remove(fastify, id);
 };
 
-export default { getAll, getById, create, update, remove };
+export default {
+  getAll,
+  getById,
+  create,
+  update,
+  remove
+};
