@@ -19,6 +19,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       res.code(200).send(await PartnersService.getById(fastify, req.params.id));
     }
   );
+  // TODO: по мимо crud нужно полное создание нового завидения
   fastify.post<{ Body: Omit<Place, 'id'> }>(
     '/',
     {
