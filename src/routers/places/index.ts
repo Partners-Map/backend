@@ -13,4 +13,15 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       rep.code(200).send(await PartnersService.getAll(fastify));
     }
   );
+  fastify.get(
+    '/addresses',
+    {
+      schema: {
+        tags: ['place']
+      }
+    },
+    async (req, rep) => {
+      rep.code(200).send(await PartnersService.getAllWithAddress(fastify));
+    }
+  );
 };
