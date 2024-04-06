@@ -19,6 +19,21 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       res.code(200).send(await PartnersService.getById(fastify, req.params.id));
     }
   );
+  fastify.get<{
+    Params: {
+      id: string;
+    };
+  }>(
+    '/:id/address',
+    {
+      schema: {
+        ...placeParamsIdRequestShema
+      }
+    },
+    async (req, res) => {
+      res.code(200).send(await PartnersService.getByIdWithAddress(fastify, req.params.id));
+    }
+  );
   fastify.post<{ Body: Omit<Place, 'id'> }>(
     '/',
     {

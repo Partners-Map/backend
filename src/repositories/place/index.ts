@@ -1,12 +1,33 @@
-import { Place as TPlace } from '@prisma/client';
+import { Address as TAddress, Place as TPlace } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 
+type TPlaceWithAddress = TPlace & {
+  address: TAddress;
+};
+
 const getAll = async (fastify: FastifyInstance): Promise<TPlace[]> => fastify.prisma.place.findMany();
+
+const getAllWithAddress = async (fastify: FastifyInstance): Promise<TPlace[]> =>
+  fastify.prisma.place.findMany({
+    include: {
+      address: true
+    }
+  });
 
 const getById = async (fastify: FastifyInstance, id: string): Promise<TPlace> =>
   await fastify.prisma.place.findUnique({
     where: {
       id
+    }
+  });
+
+const getByIdWithAddress = async (fastify: FastifyInstance, id: string): Promise<TPlace> =>
+  await fastify.prisma.place.findUnique({
+    where: {
+      id
+    },
+    include: {
+      address: true
     }
   });
 
@@ -30,4 +51,4 @@ const remove = async (fastify: FastifyInstance, id: string): Promise<TPlace> =>
     }
   });
 
-export default { getAll, getById, create, update, remove };
+export default { getAll, getAllWithAddress, getById, getByIdWithAddress, create, update, remove };

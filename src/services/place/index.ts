@@ -6,8 +6,16 @@ const getAll = async (fastify: FastifyInstance): Promise<TPlace[]> => {
   return await PlaceRepository.getAll(fastify);
 };
 
+const getAllWithAddress = async (fastify: FastifyInstance): Promise<TPlace[]> => {
+  return await PlaceRepository.getAllWithAddress(fastify);
+};
+
 const getById = async (fastify: FastifyInstance, id: string): Promise<TPlace> => {
   return await PlaceRepository.getById(fastify, id);
+};
+
+const getByIdWithAddress = async (fastify: FastifyInstance, id: string): Promise<TPlace> => {
+  return await PlaceRepository.getByIdWithAddress(fastify, id);
 };
 
 const create = async (fastify: FastifyInstance, data: Omit<TPlace, 'id'>): Promise<TPlace> => {
@@ -22,4 +30,12 @@ const remove = async (fastify: FastifyInstance, id: string): Promise<TPlace> => 
   return await PlaceRepository.remove(fastify, id);
 };
 
-export default { getAll, getById, create, update, remove };
+export default {
+  getAll,
+  getAllWithAddress,
+  getById,
+  getByIdWithAddress,
+  create,
+  update,
+  remove
+};

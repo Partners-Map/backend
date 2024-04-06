@@ -1,13 +1,12 @@
 FROM node:18.18.0
 
-RUN mkdir -p /usr/src/app/dist/
 WORKDIR /usr/src/app/
+RUN mkdir -p dist
 
-COPY ./dist /usr/src/app/dist/
-COPY ./prisma /usr/src/app/prisma/
-COPY package.json /usr/src/app/package.json
-COPY .env /usr/src/app
-COPY package-lock.json /usr/src/app/package-lock.json
+COPY ./dist ./dist/
+COPY ./prisma ./prisma/
+COPY .env ./
+COPY package*.json ./
 
 RUN npm i 
 
