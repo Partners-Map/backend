@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/Partners-Map/backend#readme",
   "dependencies": {
+    "@fastify/cookie": "^9.3.1",
     "@fastify/cors": "8.5.0",
     "@fastify/jwt": "8.0.0",
     "@fastify/type-provider-json-schema-to-ts": "3.0.0",

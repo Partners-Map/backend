@@ -35,7 +35,11 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.post<{ Body: Omit<TUser, 'id'> }>(
     '/',
     {
-      schema: { ...createUserRequestSchema, ...createUserResponseShema }
+      schema: {
+        ...createUserRequestSchema,
+        ...createUserResponseShema
+      },
+      onRequest: [fastify.authenticate]
     },
     async (req, res) => {
       res.code(201).send(await UserService.create(fastify, req.body));
