@@ -12,7 +12,8 @@ export default async (fastify: FastifyInstance) => {
     {
       schema: {
         ...roleParamsIdRequestShema
-      }
+      },
+      onRequest: [fastify.authenticate]
     },
     async (req, rep) => {
       rep.code(200).send(await RoleService.getById(fastify, req.params.id));

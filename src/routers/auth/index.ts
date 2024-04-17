@@ -1,4 +1,5 @@
 import { FastifyInstance } from 'fastify';
+import 'dotenv/config';
 import AuthService from '../../services/auth';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
@@ -34,7 +35,17 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       }
 
       const accessToken = await AuthService.generateAccessToken(lognResult.user, fastify);
-      res.code(200).send({ accessToken: accessToken });
+      res
+        .code(200)
+        .setCookie('x-access-token', accessToken, {
+          path: '/',
+          secure: false,
+          httpOnly: true,
+          sameSite: 'lax'
+        })
+        .send({
+          user: lognResult.user
+        });
     }
   );
 };

@@ -9,7 +9,8 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         tags: ['user'],
         ...getAllUsersResponseShema
-      }
+      },
+      onRequest: [fastify.authenticate]
     },
     async (req, rep) => {
       rep.code(200).send(await UserService.getAll(fastify));
