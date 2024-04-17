@@ -1,17 +1,16 @@
 import { FastifyInstance } from 'fastify/types/instance';
-import RoleService from '../../services/role';
+import DiscountTypeService from '../../services/discount-type';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get(
     '/',
     {
       schema: {
-        tags: ['role']
-      },
-      onRequest: [fastify.authenticate]
+        tags: ['discount-type']
+      }
     },
     async (req, rep) => {
-      rep.code(200).send(await RoleService.getAll(fastify));
+      rep.code(200).send(await DiscountTypeService.getAll(fastify));
     }
   );
 };
