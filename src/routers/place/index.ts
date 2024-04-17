@@ -20,6 +20,21 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     }
   );
   // TODO: по мимо crud нужно полное создание нового завидения
+  fastify.get<{
+    Params: {
+      id: string;
+    };
+  }>(
+    '/:id/address',
+    {
+      schema: {
+        ...placeParamsIdRequestShema
+      }
+    },
+    async (req, res) => {
+      res.code(200).send(await PartnersService.getByIdWithAddress(fastify, req.params.id));
+    }
+  );
   fastify.post<{ Body: Omit<Place, 'id'> }>(
     '/',
     {

@@ -277,6 +277,24 @@ export const addressesSeeds = async (
   await prisma.address.create({
     data: {
       city: 'Сочи',
+      street: '​Приморская',
+      house: '3/14',
+      latitude: 43.576334,
+      longitude: 39.722892,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Итэлия',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
       street: '​Пластунская',
       house: '123Ак2',
       latitude: 43.61607,
