@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { addressesSeeds } from './seeds/address';
+import { avgPricesSeeds } from './seeds/avg-price';
 import { categoriesSeeds } from './seeds/category';
 import { discountTypesSeeds } from './seeds/discount-type';
 import { partnersSeeds } from './seeds/partner';
@@ -16,6 +17,7 @@ const prisma = new PrismaClient();
   await partnersSeeds(prisma);
   await categoriesSeeds(prisma);
   await discountTypesSeeds(prisma);
+  await avgPricesSeeds(prisma);
   await placesSeeds(prisma);
   await addressesSeeds(prisma);
   await placeToCategoriesSeeds(prisma);

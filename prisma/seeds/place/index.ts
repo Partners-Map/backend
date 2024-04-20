@@ -3,11 +3,21 @@ import { DefaultArgs } from '@prisma/client/runtime/library';
 
 export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>) => {
   const [discountT, cashbackT] = await prisma.discountType.findMany();
+  const [smallPrice, middlePrice, largePrice] = await prisma.avgPrice.findMany();
   await prisma.place.create({
     data: {
       title: 'Ресторан Barceloneta',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: [
@@ -31,7 +41,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Ресторан ЛондонЪ',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -57,7 +71,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'SeaBus',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -83,7 +106,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Мясной синдикат',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -109,7 +136,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Хмели-Сунели',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -135,7 +171,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Япона Мама',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -161,7 +206,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Дон КихотДзе',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -187,7 +236,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Sea Zone',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -213,7 +271,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Magellan',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -239,7 +306,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Дельфин и Русалка',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: ['Оформить карту'],
@@ -259,7 +335,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Морской',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -281,7 +361,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Pita street',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -303,7 +392,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Мой кофе',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: ['Предъявить карту лояльности с 12:00 до 16:00'],
@@ -323,7 +421,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Frida',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: ['При оплате показать карту резидента "Сберпорт" сказать, что вы сотрудник Сбера'],
@@ -342,7 +449,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Зацепи',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: [
@@ -363,7 +479,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Итэлия',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: [
@@ -384,7 +504,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Best food Sochi',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: ['Заказать через нашего менеджера Лиру +79189666888', 'Написать, что вы из СберПорта'],
@@ -404,7 +528,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Domileo',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
       discount: {
         create: {
           conditions: ['Предъявить карту резидента "Сберпорт"'],
@@ -424,7 +552,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Hooknrolla',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: [
@@ -447,7 +584,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Сицилия',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: [
@@ -471,7 +612,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'SimpleWine',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: ['Ввести промокод "20SW2023"', 'Заказ должен быть через приложение или сайт'],
@@ -491,7 +641,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Pushkin',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
       discount: {
         create: {
           conditions: ['Предъявить карту резидента "Сберпорт"'],
@@ -510,7 +664,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'City Thai Spa',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -532,7 +695,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Classic',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -554,7 +726,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Don’t drama',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: ['Предъявить карту резидента "Сберпорт"'],
@@ -573,7 +754,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Loren',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -595,7 +785,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Бест-Клининг',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: ['Предъявить карту резидента "Сберпорт"'],
@@ -614,7 +813,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'World Class',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: ['Быть работником Сбербанка', 'Абонемент должен быть на: 3, 6 или 12 месяцев'],
@@ -634,7 +842,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Iskra Sochi',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: [
@@ -657,7 +874,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Ru_testo',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: ['Предъявить карту резидента "Сберпорт"', 'Сказать, что вы из IT-центра'],
@@ -676,7 +902,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Цветочный дом',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: ['Предъявить карту резидента "Сберпорт"', 'Покупка цветов или композиций'],
@@ -696,7 +931,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Tirol club',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: ['Предъявить карту резидента "Сберпорт"'],
@@ -717,7 +961,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'SurfTeamSochi',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: [
@@ -742,7 +995,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Na_yachte',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'small'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: ['Бронировать через менеджера Анастасию +79805554445', 'Сказать, что вы из Сбера'],
@@ -762,7 +1024,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Омега Сириус',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: ['Ввести промокод "Siriusclub"'],
@@ -782,7 +1053,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Дельта Сириус',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -804,7 +1084,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Альфа Сириус',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         connect: {
           conditions_amount_information_discountTypeId: {
@@ -826,7 +1115,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Green Flow',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: ['Ввести промокод "GreenFlClub2023"'],
@@ -846,7 +1144,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Swissotel Resort Сочи Камелия',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: [
@@ -871,7 +1178,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: '"Сочи-Парк" ​Тематический парк развлечений',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: [
@@ -895,7 +1206,16 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: '"Top" ​Компьютерная академия',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
+      maxAvgPrice: {
+        connect: {
+          slug: 'large'
+        }
+      },
       discount: {
         create: {
           conditions: ['Быть сотрудником банка'],
@@ -916,7 +1236,11 @@ export const placesSeeds = async (prisma: PrismaClient<Prisma.PrismaClientOption
     data: {
       title: 'Learn to Learn',
       description: '',
-      avgReceipt: 1,
+      minAvgPrice: {
+        connect: {
+          slug: 'middle'
+        }
+      },
       discount: {
         create: {
           conditions: ['Ввести промокод "LEARN2023"'],

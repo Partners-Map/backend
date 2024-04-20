@@ -33,7 +33,7 @@ model Partner {
 model AvgPrice {
   id        String  @id @default(uuid())
   symbol    String
-  slug      String
+  slug      String  @unique
   minPlaces Place[] @relation("minAvgPrice")
   maxPlaces Place[] @relation("maxAvgPrice")
 }
