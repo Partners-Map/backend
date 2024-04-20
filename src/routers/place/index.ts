@@ -1,7 +1,7 @@
 import { Place } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
+import { placeBodyRequestShema, placeParamsIdRequestShema } from '../../schemas/requests/place';
 import PartnersService from '../../services/place';
-import { placeParamsIdRequestShema, placeBodyRequestShema } from '../../schemas/requests/place';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get<{
@@ -32,6 +32,21 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.getByIdWithAddress(fastify, req.params.id));
+    }
+  );
+  fastify.get<{
+    Params: {
+      id: string;
+    };
+  }>(
+    '/:id/avg-price',
+    {
+      schema: {
+        ...placeParamsIdRequestShema
+      }
+    },
+    async (req, res) => {
+      res.code(200).send(await PartnersService.getByIdWithAvgPrice(fastify, req.params.id));
     }
   );
   fastify.post<{ Body: Omit<Place, 'id'> }>(
