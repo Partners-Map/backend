@@ -1,4 +1,4 @@
-import { Place as TPlace } from '@prisma/client';
+import { Place as TPlace, PlaceToCategory as TPlaceToCategory } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 
 const getAll = async (fastify: FastifyInstance): Promise<TPlace[]> => fastify.prisma.place.findMany();
@@ -26,6 +26,22 @@ const getAllWithFullInfo = async (fastify: FastifyInstance): Promise<TPlace[]> =
     ...place,
     maxAvgPrice: place.maxAvgPrice ? place.maxAvgPrice : '',
     maxAvgPriceId: place.maxAvgPriceId ? place.maxAvgPriceId : ''
+  }));
+
+const getAllPlaceWithCategory = async (fastify: FastifyInstance): Promise<TPlaceToCategory[]> =>
+  (
+    await fastify.prisma.placeToCategory.findMany({
+      include: {
+        place: true,
+        category: true
+      }
+    })
+  ).map(item => ({
+    ...item,
+    place: {
+      ...item.place,
+      maxAvgPriceId: item.place.maxAvgPriceId === null ? '' : item.place.maxAvgPriceId
+    }
   }));
 
 const getAllWithAvgPrice = async (fastify: FastifyInstance): Promise<TPlace[]> =>
@@ -125,6 +141,7 @@ export default {
   getAllWithAddress,
   getAllWithAvgPrice,
   getAllWithFullInfo,
+  getAllPlaceWithCategory,
   getById,
   getByIdWithAddress,
   getByIdWithAvgPrice,

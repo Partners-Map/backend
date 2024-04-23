@@ -1,4 +1,4 @@
-import { Place as TPlace } from '@prisma/client';
+import { Place as TPlace, PlaceToCategory as TPlaceToCategory } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 import PlaceRepository from '../../repositories/place';
 
@@ -12,6 +12,10 @@ const getAllWithAddress = async (fastify: FastifyInstance): Promise<TPlace[]> =>
 
 const getAllWithFullInfo = async (fastify: FastifyInstance): Promise<TPlace[]> => {
   return await PlaceRepository.getAllWithFullInfo(fastify);
+};
+
+const getAllWithCategory = async (fastify: FastifyInstance): Promise<TPlaceToCategory[]> => {
+  return await PlaceRepository.getAllPlaceWithCategory(fastify);
 };
 
 const getAllWithAvgPrice = async (fastify: FastifyInstance): Promise<TPlace[]> => {
@@ -51,6 +55,7 @@ export default {
   getAllWithAddress,
   getAllWithAvgPrice,
   getAllWithFullInfo,
+  getAllWithCategory,
   getById,
   getByIdWithAddress,
   getByIdWithAvgPrice,

@@ -46,4 +46,15 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       rep.code(200).send(await PartnersService.getAllWithFullInfo(fastify));
     }
   );
+  fastify.get(
+    '/with-category',
+    {
+      schema: {
+        tags: ['place']
+      }
+    },
+    async (req, rep) => {
+      rep.code(200).send(await PartnersService.getAllWithCategory(fastify));
+    }
+  );
 };
