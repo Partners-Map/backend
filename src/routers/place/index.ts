@@ -49,6 +49,21 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       res.code(200).send(await PartnersService.getByIdWithAvgPrice(fastify, req.params.id));
     }
   );
+  fastify.get<{
+    Params: {
+      id: string;
+    };
+  }>(
+    '/:id/full-info',
+    {
+      schema: {
+        ...placeParamsIdRequestShema
+      }
+    },
+    async (req, res) => {
+      res.code(200).send(await PartnersService.getByIdWithFullInfo(fastify, req.params.id));
+    }
+  );
   fastify.post<{ Body: Omit<Place, 'id'> }>(
     '/',
     {

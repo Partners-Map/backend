@@ -35,4 +35,15 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       rep.code(200).send(await PartnersService.getAllWithAvgPrice(fastify));
     }
   );
+  fastify.get(
+    '/full-info',
+    {
+      schema: {
+        tags: ['place']
+      }
+    },
+    async (req, rep) => {
+      rep.code(200).send(await PartnersService.getAllWithFullInfo(fastify));
+    }
+  );
 };

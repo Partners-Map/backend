@@ -10,6 +10,24 @@ const getAllWithAddress = async (fastify: FastifyInstance): Promise<TPlace[]> =>
     }
   });
 
+const getAllWithFullInfo = async (fastify: FastifyInstance): Promise<TPlace[]> =>
+  (
+    await fastify.prisma.place.findMany({
+      include: {
+        minAvgPrice: true,
+        maxAvgPrice: true,
+        partner: true,
+        address: true,
+        discount: true,
+        _count: true
+      }
+    })
+  ).map(place => ({
+    ...place,
+    maxAvgPrice: place.maxAvgPrice ? place.maxAvgPrice : '',
+    maxAvgPriceId: place.maxAvgPriceId ? place.maxAvgPriceId : ''
+  }));
+
 const getAllWithAvgPrice = async (fastify: FastifyInstance): Promise<TPlace[]> =>
   (
     await fastify.prisma.place.findMany({
@@ -30,6 +48,27 @@ const getById = async (fastify: FastifyInstance, id: string): Promise<TPlace> =>
       id
     }
   });
+
+const getByIdWithFullInfo = async (fastify: FastifyInstance, id: string): Promise<TPlace> => {
+  const place = await fastify.prisma.place.findUnique({
+    where: {
+      id
+    },
+    include: {
+      minAvgPrice: true,
+      maxAvgPrice: true,
+      partner: true,
+      address: true,
+      discount: true,
+      _count: true
+    }
+  });
+
+  return {
+    ...place,
+    maxAvgPriceId: place.maxAvgPriceId ? place.maxAvgPriceId : ''
+  };
+};
 
 const getByIdWithAddress = async (fastify: FastifyInstance, id: string): Promise<TPlace> =>
   await fastify.prisma.place.findUnique({
@@ -85,9 +124,11 @@ export default {
   getAll,
   getAllWithAddress,
   getAllWithAvgPrice,
+  getAllWithFullInfo,
   getById,
   getByIdWithAddress,
   getByIdWithAvgPrice,
+  getByIdWithFullInfo,
   create,
   update,
   remove
