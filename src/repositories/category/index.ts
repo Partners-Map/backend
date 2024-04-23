@@ -41,5 +41,9 @@ const remove = async (fastify: FastifyInstance, id: string): Promise<TCategory> 
 };
 
 export default {
-  getAll, getById, create, update, remove
+  getAll,
+  getById,
+  create,
+  update,
+  remove
 };
