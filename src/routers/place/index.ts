@@ -1,7 +1,8 @@
 import { Place } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
-import { placeBodyRequestShema, placeParamsIdRequestShema } from '../../schemas/requests/place';
+import { newPlaceBodyRequestShema, placeBodyRequestShema, placeParamsIdRequestShema } from '../../schemas/requests/place';
 import PartnersService from '../../services/place';
+import { TNewPlace } from '../../@types/api/new-place';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get<{
@@ -19,6 +20,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       res.code(200).send(await PartnersService.getById(fastify, req.params.id));
     }
   );
+  // TODO: по мимо crud нужно полное создание нового завидения
   fastify.get<{
     Params: {
       id: string;
@@ -74,6 +76,18 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.create(fastify, req.body));
+    }
+  );
+  fastify.post<{ Body: TNewPlace }>(
+    '/full',
+    {
+      schema: {
+        ...newPlaceBodyRequestShema
+      },
+      onRequest: [fastify.authenticate]
+    },
+    async (req, res) => {
+      res.code(200).send(await PartnersService.createFull(fastify, req.body));
     }
   );
   fastify.put<{
