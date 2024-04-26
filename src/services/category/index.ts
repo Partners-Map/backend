@@ -26,4 +26,10 @@ const remove = async (fastify: FastifyInstance, id: string): Promise<TCategory> 
   return await CategoryRepository.remove(fastify, id);
 };
 
-export default { getAll, getById, create, update, remove };
+export default {
+  getAll,
+  getById,
+  create,
+  update,
+  remove
+};

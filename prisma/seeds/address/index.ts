@@ -331,6 +331,24 @@ export const addressesSeeds = async (
   await prisma.address.create({
     data: {
       city: 'Сочи',
+      street: 'Юных Ленинцев',
+      house: '1',
+      latitude: 43.595201,
+      longitude: 39.725873,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Hooknrolla',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
       street: '​Навагинская',
       house: '11к5',
       latitude: 43.595201,
@@ -555,6 +573,24 @@ export const addressesSeeds = async (
         connect: {
           title_description_kitchen: {
             title: 'Iskra Sochi',
+            description: '',
+            kitchen: ''
+          }
+        }
+      }
+    }
+  });
+  await prisma.address.create({
+    data: {
+      city: 'Сочи',
+      street: 'Несебрская',
+      house: '1a',
+      latitude: 43.584564,
+      longitude: 39.716879,
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'World Class',
             description: '',
             kitchen: ''
           }

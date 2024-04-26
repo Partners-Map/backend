@@ -30,12 +30,25 @@ model Partner {
   place Place[]
 }
 
+model AvgPrice {
+  id        String  @id @default(uuid())
+  symbol    String
+  slug      String  @unique
+  minPlaces Place[] @relation("minAvgPrice")
+  maxPlaces Place[] @relation("maxAvgPrice")
+}
+
 model Place {
   id              String            @id @default(uuid())
   title           String
   description     String?           @default("")
-  avgReceipt      Int               @default(1)
   kitchen         String?           @default("")
+  openingTime     String?           @default("")
+  closingTime     String?           @default("")
+  minAvgPrice     AvgPrice          @relation("minAvgPrice", fields: [minAvgPriceId], references: [id])
+  maxAvgPrice     AvgPrice?         @relation("maxAvgPrice", fields: [maxAvgPriceId], references: [id])
+  minAvgPriceId   String            @default("")
+  maxAvgPriceId   String?
   partner         Partner           @relation(fields: [partnerId], references: [id], onDelete: Cascade)
   partnerId       String
   address         Address[]
