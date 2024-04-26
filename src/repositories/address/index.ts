@@ -15,6 +15,17 @@ const create = async (fastify: FastifyInstance, data: Omit<TAddress, 'id'>): Pro
     data
   });
 
+const createMany = async (
+  fastify: FastifyInstance,
+  data: Omit<TAddress, 'id'>[]
+): Promise<{
+  count: number;
+}> =>
+  fastify.prisma.address.createMany({
+    data,
+    skipDuplicates: true
+  });
+
 const update = async (fastify: FastifyInstance, id: string, data: Omit<TAddress, 'id'>): Promise<TAddress> =>
   fastify.prisma.address.update({
     where: {
@@ -30,4 +41,4 @@ const remove = async (fastify: FastifyInstance, id: string): Promise<TAddress> =
     }
   });
 
-export default { getAll, getById, create, update, remove };
+export default { getAll, getById, create,createMany, update, remove };
