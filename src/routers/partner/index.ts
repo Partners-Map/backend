@@ -19,13 +19,13 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       rep.code(200).send(await PartnerService.getById(fastify, req.params.id));
     }
   );
+  // TODO: проверка токена
   fastify.post<{ Body: Omit<TPartner, 'id'> }>(
     '/',
     {
       schema: {
         ...partnerBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, res) => {
       res.code(200).send(await PartnerService.create(fastify, req.body));
