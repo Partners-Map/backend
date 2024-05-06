@@ -19,7 +19,7 @@ export const partnerBodyRequestShema = {
         type: 'string'
       }
     },
-    required: ['*']
+    required: ['name']
   },
   tags: ['partner']
 };

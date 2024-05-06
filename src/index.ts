@@ -31,7 +31,7 @@ fastify.listen(
     port: Number(process.env.SERVER_PORT) || 3002,
     host: process.env.PROJECT_STATUS === 'production' ? '0.0.0.0' : 'localhost'
   },
-  async (err, address) => {
+  async err => {
     if (err) {
       fastify.log.error(err);
       process.exit(1);

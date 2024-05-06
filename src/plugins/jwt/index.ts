@@ -31,7 +31,7 @@ export default fp(async fastify => {
       secure: false,
       path: '/',
       maxAge: 60 * 60 * 24,
-      sameSite: 'lax'
+      sameSite: 'None'
     }
   } as FastifyCookieOptions);
 
@@ -41,7 +41,7 @@ export default fp(async fastify => {
       fastify.log.warn(token);
 
       if (!token) {
-        throw new Error('тут');
+        throw new Error('нет токена');
       }
 
       await req.jwtVerify();
