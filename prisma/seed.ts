@@ -12,6 +12,10 @@ import { usersSeeds } from './seeds/user';
 const prisma = new PrismaClient();
 
 (async () => {
+  if (await prisma.category.findFirst()) {
+    console.log('\n🔔 seeds не применены');
+    return;
+  }
   await rolesSeeds(prisma);
   await usersSeeds(prisma);
   await partnersSeeds(prisma);
