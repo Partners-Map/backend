@@ -1,6 +1,10 @@
 import { Place } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
-import { newPlaceBodyRequestShema, placeBodyRequestShema, placeParamsIdRequestShema } from '../../schemas/requests/place';
+import {
+  newPlaceBodyRequestShema,
+  placeBodyRequestShema,
+  placeParamsIdRequestShema
+} from '../../schemas/requests/place';
 import PartnersService from '../../services/place';
 import { TNewPlace } from '../../@types/api/new-place';
 
@@ -71,8 +75,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     {
       schema: {
         ...placeBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.create(fastify, req.body));
@@ -83,8 +86,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     {
       schema: {
         ...newPlaceBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.createFull(fastify, req.body));
@@ -101,8 +103,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         ...placeParamsIdRequestShema,
         ...placeBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.update(fastify, req.params.id, req.body));
@@ -117,8 +118,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     {
       schema: {
         ...placeParamsIdRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, rep) => {
       rep.code(200).send(await PartnersService.remove(fastify, req.params.id));

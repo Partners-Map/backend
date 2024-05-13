@@ -26,8 +26,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     {
       schema: {
         ...avgPriceBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, rep) => {
       rep.code(200).send(await AvgPriceService.create(fastify, req.body));
@@ -44,8 +43,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         ...avgPriceParamsIdRequestShema,
         ...avgPriceBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, rep) => {
       rep.code(200).send(await AvgPriceService.update(fastify, req.params.id, req.body));
@@ -60,8 +58,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     {
       schema: {
         ...avgPriceParamsIdRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, rep) => {
       rep.code(200).send(await AvgPriceService.remove(fastify, req.params.id));

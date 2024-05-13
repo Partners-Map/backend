@@ -42,8 +42,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         ...partnerParamsIdRequestShema,
         ...partnerBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, res) => {
       res.code(200).send(await PartnerService.create(fastify, req.body));
@@ -58,8 +57,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     {
       schema: {
         ...partnerParamsIdRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, res) => {
       res.code(200).send(await PartnerService.remove(fastify, req.params.id));

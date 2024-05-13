@@ -47,7 +47,7 @@ export default fp(async fastify => {
       await req.jwtVerify();
     } catch (err) {
       fastify.log.error(err);
-      res.send({ message: 'authorization error' });
+      res.code(401).send({ message: 'authorization error' });
     }
   });
 });

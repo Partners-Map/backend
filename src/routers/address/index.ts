@@ -24,8 +24,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     {
       schema: {
         ...addressBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, res) => {
       res.code(200).send(await AddressService.create(fastify, req.body));
@@ -42,8 +41,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         ...addressParamsIdRequestShema,
         ...addressBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, res) => {
       res.code(200).send(await AddressService.create(fastify, req.body));
@@ -58,8 +56,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     {
       schema: {
         ...addressParamsIdRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, res) => {
       res.code(200).send(await AddressService.remove(fastify, req.params.id));

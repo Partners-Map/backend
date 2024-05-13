@@ -7,8 +7,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     {
       schema: {
         tags: ['role']
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, rep) => {
       rep.code(200).send(await RoleService.getAll(fastify));

@@ -12,8 +12,7 @@ export default async (fastify: FastifyInstance) => {
     {
       schema: {
         ...roleParamsIdRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, rep) => {
       rep.code(200).send(await RoleService.getById(fastify, req.params.id));
@@ -28,8 +27,7 @@ export default async (fastify: FastifyInstance) => {
     {
       schema: {
         ...roleBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, rep) => {
       rep.code(200).send(await RoleService.create(fastify, req.body));
@@ -48,8 +46,7 @@ export default async (fastify: FastifyInstance) => {
       schema: {
         ...roleParamsIdRequestShema,
         ...roleBodyRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, rep) => {
       rep.code(200).send(await RoleService.update(fastify, req.params.id, req.body));
@@ -64,8 +61,7 @@ export default async (fastify: FastifyInstance) => {
     {
       schema: {
         ...roleParamsIdRequestShema
-      },
-      onRequest: [fastify.authenticate]
+      }
     },
     async (req, rep) => {
       rep.code(200).send(await RoleService.remove(fastify, req.params.id));

@@ -23,8 +23,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.post<{ Body: Omit<TDiscountType, 'id'> }>(
     '/',
     {
-      schema: { ...discountTypeBodyRequestShema },
-      onRequest: [fastify.authenticate]
+      schema: { ...discountTypeBodyRequestShema }
     },
     async (req, res) => {
       res.code(200).send(await DiscountTypeService.create(fastify, req.body));
@@ -38,8 +37,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   }>(
     '/:id',
     {
-      schema: { ...discountTypeParamsIdRequestShema, ...discountTypeBodyRequestShema },
-      onRequest: [fastify.authenticate]
+      schema: { ...discountTypeParamsIdRequestShema, ...discountTypeBodyRequestShema }
     },
     async (req, res) => {
       res.code(200).send(await DiscountTypeService.create(fastify, req.body));
@@ -52,8 +50,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   }>(
     '/:id',
     {
-      schema: { ...discountTypeParamsIdRequestShema },
-      onRequest: [fastify.authenticate]
+      schema: { ...discountTypeParamsIdRequestShema }
     },
     async (req, res) => {
       res.code(200).send(await DiscountTypeService.remove(fastify, req.params.id));
