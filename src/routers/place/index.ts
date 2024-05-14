@@ -123,6 +123,23 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       res.code(200).send(await PartnersService.update(fastify, req.params.id, req.body));
     }
   );
+  fastify.put<{
+    Params: {
+      id: string;
+    };
+    Body: TNewPlace;
+  }>(
+    '/:id/full',
+    {
+      schema: {
+        ...placeParamsIdRequestShema,
+        ...newPlaceBodyRequestShema
+      }
+    },
+    async (req, res) => {
+      res.code(200).send(await PartnersService.updateFull(fastify, req.params.id, req.body));
+    }
+  );
   fastify.delete<{
     Params: {
       id: string;

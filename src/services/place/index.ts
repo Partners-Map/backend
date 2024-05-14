@@ -53,11 +53,6 @@ const create = async (fastify: FastifyInstance, data: Omit<TPlace, 'id'>): Promi
 };
 
 const createFull = async (fastify: FastifyInstance, data: TNewPlace): Promise<TPlace> => {
-  console.log({
-    ...data.discount,
-    amount: Number(data.discount.amount)
-  });
-
   const discount = await DiscountRepository.create(fastify, {
     ...data.discount,
     amount: Number(data.discount.amount)
@@ -88,6 +83,51 @@ const update = async (fastify: FastifyInstance, id: string, data: Omit<TPlace, '
   return await PlaceRepository.update(fastify, id, data);
 };
 
+const updateFull = async (fastify: FastifyInstance, id: string, data: TNewPlace): Promise<TPlace> => {
+  try {
+    return await fastify.prisma.place.update({
+      where: {
+        id
+      },
+      data: {
+        title: data.place.title,
+        description: data.place.description,
+        kitchen: '',
+        openingTime: data.place.openingTime,
+        closingTime: data.place.closingTime,
+        minAvgPrice: {
+          connect: {
+            id: data.place.minAvgPriceId
+          }
+        },
+        maxAvgPrice:
+          data.place.maxAvgPriceId !== ''
+            ? {
+                connect: {
+                  id: data.place.minAvgPriceId
+                }
+              }
+            : null,
+        partner: {
+          connect: {
+            id: data.partnerId
+          }
+        },
+        discount: {
+          update: {
+            conditions: data.discount.conditions,
+            amount: data.discount.amount,
+            information: data.discount.information,
+            discountTypeId: data.discount.discountTypeId
+          }
+        }
+      }
+    });
+  } catch (error) {
+    fastify.log.error(error);
+  }
+};
+
 const remove = async (fastify: FastifyInstance, id: string): Promise<TPlace> => {
   return await PlaceRepository.remove(fastify, id);
 };
@@ -106,5 +146,6 @@ export default {
   create,
   createFull,
   update,
+  updateFull,
   remove
 };
