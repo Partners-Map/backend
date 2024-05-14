@@ -24,7 +24,6 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       res.code(200).send(await PartnersService.getById(fastify, req.params.id));
     }
   );
-  // TODO: по мимо crud нужно полное создание нового завидения
   fastify.get<{
     Params: {
       id: string;
@@ -53,6 +52,21 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.getByIdWithAvgPrice(fastify, req.params.id));
+    }
+  );
+  fastify.get<{
+    Params: {
+      id: string;
+    };
+  }>(
+    '/:id/with-category',
+    {
+      schema: {
+        ...placeParamsIdRequestShema
+      }
+    },
+    async (req, res) => {
+      res.code(200).send(await PartnersService.getByIdWithCategory(fastify, req.params.id));
     }
   );
   fastify.get<{

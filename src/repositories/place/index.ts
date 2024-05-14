@@ -116,6 +116,27 @@ const getByIdWithAvgPrice = async (fastify: FastifyInstance, id: string): Promis
   return placeWithEmptyMaxAvgPrice;
 };
 
+const getByIdPlaceWithCategory = async (fastify: FastifyInstance, id: string): Promise<TPlaceToCategory[]> =>
+  (
+    await fastify.prisma.placeToCategory.findMany({
+      where: {
+        place: {
+          id
+        }
+      },
+      include: {
+        place: true,
+        category: true
+      }
+    })
+  ).map(item => ({
+    ...item,
+    place: {
+      ...item.place,
+      maxAvgPriceId: item.place.maxAvgPriceId === null ? '' : item.place.maxAvgPriceId
+    }
+  }));
+
 const create = async (fastify: FastifyInstance, data: Omit<TPlace, 'id'>): Promise<TPlace> =>
   await fastify.prisma.place.create({
     data
@@ -146,6 +167,7 @@ export default {
   getByIdWithAddress,
   getByIdWithAvgPrice,
   getByIdWithFullInfo,
+  getByIdPlaceWithCategory,
   create,
   update,
   remove
