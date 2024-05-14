@@ -44,6 +44,10 @@ const getByIdWithAvgPrice = async (fastify: FastifyInstance, id: string): Promis
   return await PlaceRepository.getByIdWithAvgPrice(fastify, id);
 };
 
+const getByIdWithCategory = async (fastify: FastifyInstance, id: string): Promise<TPlaceToCategory[]> => {
+  return await PlaceRepository.getByIdPlaceWithCategory(fastify, id);
+};
+
 const create = async (fastify: FastifyInstance, data: Omit<TPlace, 'id'>): Promise<TPlace> => {
   return await PlaceRepository.create(fastify, data);
 };
@@ -98,6 +102,7 @@ export default {
   getByIdWithAddress,
   getByIdWithAvgPrice,
   getByIdWithFullInfo,
+  getByIdWithCategory,
   create,
   createFull,
   update,
