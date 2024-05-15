@@ -85,7 +85,7 @@ const update = async (fastify: FastifyInstance, id: string, data: Omit<TPlace, '
 
 const updateFull = async (fastify: FastifyInstance, id: string, data: TNewPlace): Promise<TPlace> => {
   try {
-    return await fastify.prisma.place.update({
+    await fastify.prisma.place.update({
       where: {
         id
       },
@@ -123,6 +123,21 @@ const updateFull = async (fastify: FastifyInstance, id: string, data: TNewPlace)
         }
       }
     });
+
+    await fastify.prisma.address.deleteMany({
+      where: {
+        placeId: id
+      }
+    });
+
+    const newAddresses = data.addresses.map(address => ({
+      ...address,
+      placeId: id
+    }));
+
+    if (newAddresses.length > 0) {
+      await fastify.prisma.address.createMany({ data: newAddresses });
+    }
   } catch (error) {
     fastify.log.error(error);
   }
