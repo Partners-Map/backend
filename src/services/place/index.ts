@@ -1,11 +1,10 @@
-import { Place as TPlace, PlaceToCategory as TPlaceToCategory } from '@prisma/client';
+import { Place as TPlace, PlaceToCategory as TPlaceToCategory, Address as TAddress } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 import PlaceRepository from '../../repositories/place';
 import DiscountRepository from '../../repositories/discount';
 import CategoryRepository from '../../repositories/category';
 import AddressRepository from '../../repositories/address';
-
-import { TNewPlace } from '../../@types/api/new-place';
+import type { TNewPlace } from '../../@types/api/new-place';
 import { Decimal } from '@prisma/client/runtime/library';
 
 const getAll = async (fastify: FastifyInstance): Promise<TPlace[]> => {
@@ -85,44 +84,22 @@ const update = async (fastify: FastifyInstance, id: string, data: Omit<TPlace, '
 
 const updateFull = async (fastify: FastifyInstance, id: string, data: TNewPlace): Promise<TPlace> => {
   try {
-    return await fastify.prisma.place.update({
-      where: {
-        id
-      },
-      data: {
-        title: data.place.title,
-        description: data.place.description,
-        kitchen: '',
-        openingTime: data.place.openingTime,
-        closingTime: data.place.closingTime,
-        minAvgPrice: {
-          connect: {
-            id: data.place.minAvgPriceId
-          }
-        },
-        maxAvgPrice:
-          data.place.maxAvgPriceId !== ''
-            ? {
-                connect: {
-                  id: data.place.minAvgPriceId
-                }
-              }
-            : null,
-        partner: {
-          connect: {
-            id: data.partnerId
-          }
-        },
-        discount: {
-          update: {
-            conditions: data.discount.conditions,
-            amount: data.discount.amount,
-            information: data.discount.information,
-            discountTypeId: data.discount.discountTypeId
-          }
-        }
-      }
-    });
+    await PlaceRepository.updateFull(fastify, id, data);
+
+    await AddressRepository.removeManyByPlaceId(fastify, id);
+
+    const newAddresses: Omit<TAddress, 'id'>[] = data.addresses.map(address => ({
+      ...address,
+      placeId: id,
+      latitude: new Decimal(address.latitude),
+      longitude: new Decimal(address.longitude)
+    }));
+
+    if (newAddresses.length > 0) {
+      await AddressRepository.createMany(fastify, newAddresses);
+    }
+
+    return await getByIdWithFullInfo(fastify, id);
   } catch (error) {
     fastify.log.error(error);
   }
