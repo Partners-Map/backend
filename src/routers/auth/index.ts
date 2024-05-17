@@ -27,25 +27,17 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       }
     },
     async (req, res) => {
-      const lognResult = await AuthService.checkUser(req.body, fastify);
+      const loginResult = await AuthService.checkUser(req.body, fastify);
 
-      if (!lognResult.status) {
+      if (!loginResult.status) {
         res.code(401).send({ error: 'неверный email или password' });
         return;
       }
 
-      const accessToken = await AuthService.generateAccessToken(lognResult.user, fastify);
-      res
-        .code(200)
-        .setCookie('x-access-token', accessToken, {
-          path: '/',
-          secure: false,
-          httpOnly: true,
-          sameSite: 'lax'
-        })
-        .send({
-          user: lognResult.user
-        });
+      req.session.set('data', req.body);
+      res.code(200).send({
+        user: loginResult.user
+      });
     }
   );
 };
