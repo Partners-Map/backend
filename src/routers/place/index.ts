@@ -90,7 +90,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         ...placeBodyRequestShema
       },
-      onRequest: fastify.authenticate
+      onRequest: fastify.sessionAuth
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.create(fastify, req.body));
@@ -102,7 +102,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         ...newPlaceBodyRequestShema
       },
-      onRequest: fastify.authenticate
+      onRequest: fastify.sessionAuth
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.createFull(fastify, req.body));
@@ -120,7 +120,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
         ...placeParamsIdRequestShema,
         ...placeBodyRequestShema
       },
-      onRequest: fastify.authenticate
+      onRequest: fastify.sessionAuth
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.update(fastify, req.params.id, req.body));
@@ -138,7 +138,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
         ...placeParamsIdRequestShema,
         ...newPlaceBodyRequestShema
       },
-      onRequest: fastify.authenticate
+      onRequest: fastify.sessionAuth
     },
     async (req, res) => {
       res.code(200).send(await PartnersService.updateFull(fastify, req.params.id, req.body));
@@ -154,7 +154,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         ...placeParamsIdRequestShema
       },
-      onRequest: fastify.authenticate
+      onRequest: fastify.sessionAuth
     },
     async (req, rep) => {
       rep.code(200).send(await PartnersService.remove(fastify, req.params.id));

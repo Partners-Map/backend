@@ -5,7 +5,7 @@ import fp from 'fastify-plugin';
 
 declare module 'fastify' {
   interface FastifyInstance {
-    authenticate: (req: FastifyRequest, res: FastifyReply) => Promise<void>;
+    sessionAuth: (req: FastifyRequest, res: FastifyReply) => Promise<void>;
   }
 }
 
@@ -34,7 +34,7 @@ export default fp(async fastify => {
     }
   });
 
-  fastify.decorate('authenticate', async (req: FastifyRequest, res: FastifyReply) => {
+  fastify.decorate('sessionAuth', async (req: FastifyRequest, res: FastifyReply) => {
     try {
       const data = req.session.get('data');
       if (!data) {

@@ -102,7 +102,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
         },
         tags: ['category']
       },
-      onRequest: fastify.authenticate
+      onRequest: fastify.sessionAuth
     },
     async (req, rep) => {
       rep.code(200).send(await CategoryService.remove(fastify, req.params.id));

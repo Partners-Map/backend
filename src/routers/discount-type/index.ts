@@ -26,7 +26,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         ...discountTypeBodyRequestShema
       },
-      onRequest: fastify.authenticate
+      onRequest: fastify.sessionAuth
     },
     async (req, res) => {
       res.code(200).send(await DiscountTypeService.create(fastify, req.body));
@@ -44,7 +44,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
         ...discountTypeParamsIdRequestShema,
         ...discountTypeBodyRequestShema
       },
-      onRequest: fastify.authenticate
+      onRequest: fastify.sessionAuth
     },
     async (req, res) => {
       res.code(200).send(await DiscountTypeService.create(fastify, req.body));
@@ -60,7 +60,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       schema: {
         ...discountTypeParamsIdRequestShema
       },
-      onRequest: fastify.authenticate
+      onRequest: fastify.sessionAuth
     },
     async (req, res) => {
       res.code(200).send(await DiscountTypeService.remove(fastify, req.params.id));
