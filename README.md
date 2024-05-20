@@ -22,6 +22,11 @@ cp .env.template .env
    npm run seeds
 ```
 
+Для перезапуска seeds введите:
+```bash
+npm run db:stop && npm run db:start && sleep 2 && npm run seeds
+```
+
 3. Запуск сервер-приложения
 
 ```bash
@@ -33,3 +38,5 @@ cp .env.template .env
 ```bash
   npm run deploy:start
 ```
+
+
