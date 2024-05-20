@@ -10,11 +10,11 @@
     "prod": "PROJECT_STATUS=production node dist/src/index",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc",
-    "db:start": "db:stop && docker compose up --build partners-db -d",
+    "db:start": "npm run db:stop && docker compose up --build partners-db -d",
     "db:stop": "docker compose down --remove-orphans -v partners-db",
     "seeds": "npx prisma db push && npx prisma db seed",
     "reseeds": "npm run db:stop && npm run db:start && sleep 2 && npm run seeds",
-    "deploy:start": "deploy:stop && npm run build && docker compose up --build",
+    "deploy:start": "npm run deploy:stop && npm run build && docker compose up --build",
     "deploy:stop": "docker compose down --remove-orphans -v"
   },
   "repository": {
