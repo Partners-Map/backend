@@ -5,6 +5,7 @@ import Fastify from 'fastify';
 import { join } from 'path';
 import { loggerConfig } from './configs/logger';
 
+// TODO Дипломная версия проекта
 const fastify = Fastify({
   logger: loggerConfig[process.env.PROJECT_STATUS] ?? true
 }).withTypeProvider<JsonSchemaToTsProvider>();
