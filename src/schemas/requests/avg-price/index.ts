@@ -1,4 +1,4 @@
-export const partnerParamsIdRequestShema = {
+export const avgPriceParamsIdRequestShema = {
   params: {
     type: 'object',
     properties: {
@@ -8,18 +8,21 @@ export const partnerParamsIdRequestShema = {
     },
     required: ['id']
   },
-  tags: ['partner']
+  tags: ['avg-price']
 };
 
-export const partnerBodyRequestShema = {
+export const avgPriceBodyRequestShema = {
   body: {
     type: 'object',
     properties: {
-      name: {
+      symbol: {
+        type: 'number'
+      },
+      slug: {
         type: 'string'
       }
     },
-    required: ['name']
+    required: ['*']
   },
-  tags: ['partner']
+  tags: ['avg-price']
 };

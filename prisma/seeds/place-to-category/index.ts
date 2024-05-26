@@ -742,4 +742,22 @@ export const placeToCategoriesSeeds = async (
       }
     }
   });
+  await prisma.placeToCategory.create({
+    data: {
+      place: {
+        connect: {
+          title_description_kitchen: {
+            title: 'Learn to Learn',
+            description: '',
+            kitchen: ''
+          }
+        }
+      },
+      category: {
+        connect: {
+          title: 'Образование'
+        }
+      }
+    }
+  });
 };

@@ -1,7 +1,7 @@
-import { User as TUser } from '@prisma/client';
+import type { User as TUser } from '@prisma/client';
+import bcrypt from 'bcrypt';
 import { FastifyInstance } from 'fastify';
 import UserRepository from '../../repositories/user';
-import bcrypt from 'bcrypt';
 
 type TLoginData = {
   email: string;
@@ -28,13 +28,6 @@ const checkUser = async (
       };
 };
 
-const generateAccessToken = async (user: TUser, fastify: FastifyInstance): Promise<string> => {
-  return await fastify.jwt.sign({
-    userId: user.id
-  });
-};
-
 export default {
-  checkUser,
-  generateAccessToken
+  checkUser
 };

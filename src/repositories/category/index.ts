@@ -1,4 +1,4 @@
-import { Category as TCategory } from '@prisma/client';
+import { Category as TCategory, PlaceToCategory as TPlaceToCategory } from '@prisma/client';
 import { FastifyInstance } from 'fastify';
 
 const getAll = async (fastify: FastifyInstance): Promise<TCategory[]> => fastify.prisma.category.findMany();
@@ -40,4 +40,23 @@ const remove = async (fastify: FastifyInstance, id: string): Promise<TCategory> 
   });
 };
 
-export default { getAll, getById, create, update, remove };
+const tyingCategoryAndPlace = async (
+  fastify: FastifyInstance,
+  data: { placeId: string; categoryId: string }
+): Promise<TPlaceToCategory> => {
+  return await fastify.prisma.placeToCategory.create({
+    data: {
+      placeId: data.placeId,
+      categoryId: data.categoryId
+    }
+  });
+};
+
+export default {
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
+  tyingCategoryAndPlace
+};

@@ -1,4 +1,4 @@
-export const partnerParamsIdRequestShema = {
+export const discountTypeParamsIdRequestShema = {
   params: {
     type: 'object',
     properties: {
@@ -8,18 +8,18 @@ export const partnerParamsIdRequestShema = {
     },
     required: ['id']
   },
-  tags: ['partner']
+  tags: ['discount-type']
 };
 
-export const partnerBodyRequestShema = {
+export const discountTypeBodyRequestShema = {
   body: {
     type: 'object',
     properties: {
-      name: {
+      title: {
         type: 'string'
       }
     },
-    required: ['name']
+    required: ['title']
   },
-  tags: ['partner']
+  tags: ['discount-type']
 };

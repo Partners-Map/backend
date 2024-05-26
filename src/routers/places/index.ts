@@ -24,4 +24,37 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       rep.code(200).send(await PartnersService.getAllWithAddress(fastify));
     }
   );
+  fastify.get(
+    '/avg-price',
+    {
+      schema: {
+        tags: ['place']
+      }
+    },
+    async (req, rep) => {
+      rep.code(200).send(await PartnersService.getAllWithAvgPrice(fastify));
+    }
+  );
+  fastify.get(
+    '/full-info',
+    {
+      schema: {
+        tags: ['place']
+      }
+    },
+    async (req, rep) => {
+      rep.code(200).send(await PartnersService.getAllWithFullInfo(fastify));
+    }
+  );
+  fastify.get(
+    '/with-category',
+    {
+      schema: {
+        tags: ['place']
+      }
+    },
+    async (req, rep) => {
+      rep.code(200).send(await PartnersService.getAllWithCategory(fastify));
+    }
+  );
 };

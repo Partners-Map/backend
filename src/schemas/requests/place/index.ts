@@ -38,3 +38,33 @@ export const placeBodyRequestShema = {
   },
   tags: ['place']
 };
+
+export const newPlaceBodyRequestShema = {
+  body: {
+    type: 'object',
+    properties: {
+      partnerId: {
+        type: 'string'
+      },
+      categoryId: {
+        type: 'string'
+      },
+      place: {
+        type: 'object',
+        properties: {}
+      },
+      discount: {
+        type: 'object',
+        properties: {}
+      },
+      addresses: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {}
+        }
+      }
+    }
+  },
+  tags: ['place']
+};
